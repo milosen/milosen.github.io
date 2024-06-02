@@ -5,7 +5,7 @@ excerpt: "Allan Lab -- Pictures"
 permalink: /activities/
 ---
 
-# Pictures
+# Activities
 Jump to: [Leiden](#leiden), [ETHZ](#ethz), [Cornell](#cornell), [St Andrews](#st-andrews)
 
 

@@ -1,15 +1,11 @@
 ---
-title: "Allan Lab - Research"
+title: "Nikola Milosevic - About"
 layout: textlay
-excerpt: "Allan Lab -- Research"
+excerpt: "Nikola Milosevic -- About"
 sitemap: false
 permalink: /about/
 ---
 
-# Research
+# About
 
-Updating soon -- stay put. (Aug 11 2023)
-
-![]({{ site.url }}{{ site.baseurl }}/images/respic/SciPost.png){: style="width: 70%; float: center; margin: 0px"}
-
-
+Updating soon -- stay put. (June 2 2024)
