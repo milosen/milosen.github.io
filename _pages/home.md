@@ -1,12 +1,11 @@
 ---
-title: "Allan Lab - Home"
+title: "Nikola Milosevic - Home"
 layout: homelay
-excerpt: "Allan Lab at Leiden University &rarr; LMU."
 sitemap: true
 permalink: /
 ---
 
-I'm a PhD Student in Machine Learning with the [Neural Data Science and Statistical Computing Lab](https://www.cbs.mpg.de/methods-and-development-groups/neural-data-science-and-statistical-computing) at [MPI CBS](https://www.cbs.mpg.de/en) in [Leipzig](https://en.wikipedia.org/wiki/Leipzig).
+I'm a PhD Student with the [Neural Data Science and Statistical Computing Lab](https://www.cbs.mpg.de/methods-and-development-groups/neural-data-science-and-statistical-computing) at [MPI CBS](https://www.cbs.mpg.de/en) in [Leipzig](https://en.wikipedia.org/wiki/Leipzig).
 
 <div markdown="0" id="carousel" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="hover" >
     <!-- Menu -->
@@ -34,9 +33,6 @@ I'm a PhD Student in Machine Learning with the [Neural Data Science and Statisti
     <span class="sr-only">Next</span>
   </a>
 </div>
-
-Explain research...
-(see [About](about)).
 
 <!--figure class="fourth">
   <img src="{{ site.url }}{{ site.baseurl }}/images/logopic/Logo_Leiden.jpg" style="width: 210px">

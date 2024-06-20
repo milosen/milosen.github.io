@@ -1,4 +1,13 @@
 
+- title: "Open Problem: Active Representation Learning"
+  image: active_rep_learning.png
+  description: We introduce a novel class of problems that intertwines exploration and representation learning within partially observable environments.
+  authors: Nikola Milosevic, Gesine Müller, Jan Huisken, Nico Scherf
+  link:
+    url: https://arxiv.org/abs/2406.03845
+    display: Preprint (Accepted @ ICML Workshop ARLET)
+  highlight: 1
+
 - title: "The ARC Toolbox: Artificial Languages with Rhythmicity Control"
   image: ARC_Flowchart.png
   description: We present ARC, our Python toolbox for creating artificial languages tailored to experiments on statistical language learning in the brain.
