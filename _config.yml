@@ -8,9 +8,9 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "Nick M.K."
+title                    : "Nikola Milosevic"
 title_separator          : "-"
-name                     : &name "Nick's Homepage"
+name                     : &name "Nikola Milosevic"
 description              : &description "my homepage"
 url                      : https://milosen.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
@@ -22,7 +22,7 @@ repository               : "milosen/milosen.github.io"
 author:
   # Biographic information
   avatar           : "boot2.JPG"
-  name             : "Nikola Milosevic Krause"
+  name             : "Nikola Milosevic"
   pronouns         : # example: "she/her"  
   bio              : "Engineer / Computer Scientist / PhD Student working on Trustworthy Reinforcement Learning"
   location         : "Leipzig, Germany"
