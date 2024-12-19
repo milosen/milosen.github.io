@@ -21,10 +21,10 @@ repository               : "milosen/milosen.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "boot2.JPG"
+  avatar           : "profile.png"
   name             : "Nikola Milosevic"
   pronouns         : # example: "she/her"  
-  bio              : "Engineer / Computer Scientist / PhD Student working on Trustworthy Reinforcement Learning"
+  bio              : "PhD Student in Reinforcement Learning"
   location         : "Leipzig, Germany"
   employer         : "Max Planck Society"
 #  uri              : "https://www.cbs.mpg.de/person/125863/2482"
