@@ -4,5 +4,5 @@ width: 4
 date: 2017-01-14 00:01:00 +0800
 ---
 <div class="p-4 text-center">
-$a^2 + b^2 = c^2$
+$\rho(s) = \gamma \sum_{s', a'} \rho(s', a')P(s|s',a') - (1-\gamma) \mu(s)$
 </div>
