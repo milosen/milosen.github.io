@@ -6,6 +6,6 @@ date: 2024-01-12 00:01:00 +0800
 
 <div class="p-4">
     <p>
-        There are no rules here, just things I like: Photos, projects, maths, and other things that I find interesting.
+        Personal projects, math, and interesting finds—just things I’ve made or discovered and want to share.
     </p>
 </div>
