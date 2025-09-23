@@ -5,7 +5,7 @@ selected:       true
 pub:            "International Conference on Machine Learning (ICML)"
 # pub_pre:        "Submitted to "
 # pub_post:       'Under review.'
-pub_last:       ' <span class="badge badge-pill badge-publication badge-success">Spotlight</span>'
+# pub_last:       ' <span class="badge badge-pill badge-publication badge-success">Spotlight</span>'
 pub_date:       "2025"
 
 abstract: >-
@@ -19,7 +19,7 @@ abstract: >-
   connections to TRPO, Natural Policy Gradient (NPG), and Constrained Policy
   Optimization (CPO). Experiments show that C-TRPO reduces constraint violations
   while maintaining competitive returns.
-#cover:          /assets/images/covers/cover3.jpg
+cover:          /assets/images/covers/ctrpo_idea_2.jpg
 authors:
   - Nikola Milosevic
   - Johannes Müller
