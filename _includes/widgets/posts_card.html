@@ -1,0 +1,16 @@
+<div class="my-3 bg-white shadow-sm rounded-sm">
+    <h6 class="p-3 mb-0 border-bottom border-gray"><i class="fas fa-pen"></i> Blog Posts</h6>
+    <div class="px-3 pb-1">
+        {% for post in site.posts %}
+        <div class="media py-2 {% unless forloop.first %}border-top border-gray{% endunless %}">
+            <div class="media-body">
+                <a href="{{ post.url | relative_url }}" class="font-weight-bold">{{ post.title }}</a>
+                {% if post.description %}
+                <div class="text-muted small">{{ post.description }}</div>
+                {% endif %}
+            </div>
+            <div class="ml-3 mt-auto text-muted no-break small"><i>{{ post.date | date: "%b %Y" }}</i></div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

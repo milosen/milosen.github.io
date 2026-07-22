@@ -1,0 +1,145 @@
+---
+layout: null
+title: "The geometry of occupancy measures, Part II: the cometric and its consequences"
+date: 2026-07-22
+description: "The Fisher cometric as variance, reward shaping as gauge freedom, Chentsov's theorem on the occupancy polytope, and why the invariant metric is not unique."
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The geometry of occupancy measures, Part II: the cometric and its consequences</title>
+<meta name="description" content="The Fisher cometric as variance, reward shaping as gauge freedom, Chentsov's theorem on the occupancy polytope, and why the invariant metric is not unique.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="The geometry of occupancy measures, Part II: the cometric and its consequences">
+<meta property="og:description" content="The Fisher cometric as variance, reward shaping as gauge freedom, and why the invariant metric on the occupancy polytope is not unique.">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:image" content="{{ '/assets/images/portrait.jpg' | absolute_url }}">
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@NikMilosevic">
+<meta name="twitter:title" content="The geometry of occupancy measures, Part II">
+<meta name="twitter:description" content="The Fisher cometric as variance, reward shaping as gauge freedom, and why the invariant metric on the occupancy polytope is not unique.">
+<meta name="twitter:image" content="{{ '/assets/images/portrait.jpg' | absolute_url }}">
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title="Nikola Milosevic" href="{{ '/feed.xml' | absolute_url }}">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false});"></script>
+
+<style>
+  :root{
+    --bg:#ffffff; --text:#1c1c1a; --muted:#56564f; --faint:#8a8a82;
+    --border:rgba(0,0,0,0.12); --card:#f5f5f1; --accent:#0F6E56;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#16171a; --text:#e7e6e1; --muted:#aeaea6; --faint:#7d7d76;
+      --border:rgba(255,255,255,0.15); --card:#212226; --accent:#5DCAA5;
+    }
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);}
+  body{
+    font-family:Georgia,Cambria,"Times New Roman",serif;
+    font-size:18px; line-height:1.72;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:3.5rem 1.25rem 5rem;}
+  h1,h2,h3,.byline,.caption,.tag{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  }
+  h1{font-size:2.05rem;line-height:1.18;font-weight:600;letter-spacing:-0.01em;margin:0 0 0.5rem;}
+  h2{font-size:1.35rem;font-weight:600;margin:2.8rem 0 0.8rem;letter-spacing:-0.01em;}
+  .byline{color:var(--faint);font-size:0.9rem;margin:0 0 2.4rem;}
+  p{margin:1.1rem 0;}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 35%,transparent);}
+  a:hover{border-bottom-color:var(--accent);}
+  em{font-style:italic;}
+  strong{font-weight:600;}
+  .lead{font-size:1.12rem;color:var(--muted);}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0;}
+  .tag{display:inline-block;font-size:0.72rem;letter-spacing:0.04em;text-transform:uppercase;
+    color:var(--faint);border:1px solid var(--border);border-radius:999px;padding:2px 10px;margin-bottom:1.2rem;}
+  hr{border:none;border-top:1px solid var(--border);margin:3rem 0;}
+  .home-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    font-size:0.84rem;font-weight:500;
+    color:var(--muted);border:1px solid var(--border);border-bottom:1px solid var(--border);
+    border-radius:999px;padding:4px 14px;margin-bottom:2rem;
+    text-decoration:none;transition:color 0.15s,border-color 0.15s;
+  }
+  .home-btn:hover{color:var(--accent);border-color:var(--accent);}
+  .share-row{display:flex;align-items:center;gap:10px;margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--border);flex-wrap:wrap;}
+  .share-label{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;font-size:0.82rem;color:var(--faint);margin-right:4px;}
+  .share-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    font-size:0.82rem;font-weight:500;
+    color:var(--muted);border:1px solid var(--border);border-radius:999px;
+    padding:4px 14px;text-decoration:none;border-bottom:1px solid var(--border);
+    transition:color 0.15s,border-color 0.15s;
+  }
+  .share-btn:hover{color:var(--accent);border-color:var(--accent);}
+  .draft-banner{
+    background:var(--card);border:1px solid var(--border);border-radius:8px;
+    padding:0.9rem 1.1rem;margin-bottom:2rem;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    font-size:0.88rem;color:var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="{{ '/' | relative_url }}" class="home-btn">&#8592; Home</a>
+
+  <span class="tag">Interactive essay &middot; Part II</span>
+  <h1>The geometry of occupancy measures, Part&nbsp;II</h1>
+  <p class="byline">Nikola Milosevic &middot; July 2026 &middot; Reinforcement learning, information geometry</p>
+
+  <div class="draft-banner">&#9998; This post is a work in progress. <a href="{{ '/2026/06/25/occupancy-geometry.html' | relative_url }}">Part I</a> is complete.</div>
+
+  <p class="lead">Part I showed that the occupancy polytope $\mathcal{O}$ is a curved surface inside the simplex $\Delta(\mathcal{S}\times\mathcal{A})$, that the Fisher&ndash;Rao metric warps according to how often each state is visited, and that the Bellman equations couple the policy to its visitation through a drag term the natural policy gradient drops. This part asks a more algebraic question: what is the right metric on $\mathcal{O}$ in the first place? The answer depends on how one defines "right", and the most natural definition (invariance under structure-preserving maps of MDPs) does not single out a unique answer.</p>
+
+  <h2>The cometric is the primitive object</h2>
+
+  <p>The Fisher&ndash;Rao metric on a probability simplex $\Delta(X)$ is usually introduced as the inner product of tangent vectors $u,v$ at $\omega$ given by $\sum_x u(x)v(x)/\omega(x)$. But the object that behaves well at the boundary, and that makes the probabilistic meaning transparent, is its inverse, the <em>cometric</em>. Fix a point $\omega \in \Delta(X)$; a function $c : X \to \mathbb{R}$ is then a random variable, and define the <strong>Fisher cometric</strong> through its variance:</p>
+
+  $$g^{*}_{\omega}(c, c') \;:=\; \operatorname{Cov}_\omega(c, c') \;=\; \mathbb{E}_\omega[cc'] - \mathbb{E}_\omega[c]\,\mathbb{E}_\omega[c'].$$
+
+  <p>No logarithm appears. In coordinates the cometric is the covariance matrix of the coordinate indicators, $g^{*}_{ij}(\omega) = \omega_i\,\delta_{ij} - \omega_i\,\omega_j$, which is polynomial in $\omega$ with $\omega$ in the numerator: defined and smooth on the closed simplex, boundary included. The familiar metric is its pseudo-inverse: $g_{ij}(\omega) = \delta_{ij}/\omega_i$ in the mixture chart, with $\omega$ now in the denominator, blowing up at the boundary. The blow-up is not a property of the geometry; it is the singularity of the logarithm. The cometric degenerates at the boundary not by blowing up but by losing rank, and its rank is exactly $|\operatorname{supp}\omega| - 1$, the dimension of the face the boundary point sits on.</p>
+
+  <h2>Functions cast covectors: reward shaping as gauge freedom</h2>
+
+  <p>A function $c$ on $X$ induces a covector at every $\omega$: the map $\omega \mapsto \langle c, \omega \rangle = \sum_x c(x)\omega(x)$ is smooth, and its differential $\delta_\omega(c)$ is a linear functional on tangent vectors. On the full simplex, the kernel of this map is the constant functions: adding a constant to $c$ shifts $\langle c, \omega \rangle$ uniformly and changes no differential. A covector is a function modulo an additive constant.</p>
+
+  <p>On the occupancy polytope $\mathcal{O}$ the tangent space is smaller (only velocity fields consistent with the Bellman flow), so the kernel of $\delta_\omega$ is larger. The extra elements in the kernel are exactly the functions whose gradient is zero on $\mathcal{O}$: potential functions $V$ for which $c(s,a) = V(s) - \gamma \sum_{s'} P(s'\mid s,a) V(s')$, i.e. functions that can be written as the Bellman residual of a value function. Adding such a $c$ to the reward changes no occupancy-based expectation and hence no policy gradient. This is <strong>reward shaping</strong>, the gauge freedom of the occupancy view, and it is exactly the kernel of the shadow map on $\mathcal{O}$, not a separate theorem.</p>
+
+  <h2>Which metric is canonical?</h2>
+
+  <hr>
+  <p class="caption">&#9998; Figures are planned for this post. The algebraic content is complete; interactive illustrations of the cometric at the boundary and the reward-shaping kernel are in preparation.</p>
+
+</div>
+
+<div class="share-row" style="max-width:720px;margin:0 auto;padding:0 1.25rem 5rem;">
+  <span class="share-label">Share</span>
+  <a class="share-btn" target="_blank"
+     href="https://twitter.com/intent/tweet?text=The+geometry+of+occupancy+measures+Part+II&url={{ page.url | absolute_url | url_encode }}&via=NikMilosevic">
+    &#120143; Post
+  </a>
+  <a class="share-btn" target="_blank"
+     href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.url | absolute_url | url_encode }}">
+    in Share
+  </a>
+</div>
+
+</body>
+</html>

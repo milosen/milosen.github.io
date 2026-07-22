@@ -1,0 +1,694 @@
+---
+layout: null
+title: "The geometry of occupancy measures"
+date: 2026-06-25
+description: "An interactive essay on the information geometry of state–action occupancy measures in reinforcement learning: the cometric as the primitive object, the marginal–conditional warp as a law of total variance, and how the dynamics couple policy to visitation."
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The hidden geometry of occupancy measures</title>
+<meta name="description" content="An interactive essay on the information geometry of state–action occupancy measures in reinforcement learning: the Fisher cometric as the primitive object, the marginal–conditional warp as a law of total variance, the visitation drag, and the non-uniqueness of the invariant metric.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="The hidden geometry of occupancy measures">
+<meta property="og:description" content="An interactive essay on the information geometry of state–action occupancy measures in reinforcement learning.">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:image" content="{{ '/assets/images/portrait.jpg' | absolute_url }}">
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@NikMilosevic">
+<meta name="twitter:title" content="The hidden geometry of occupancy measures">
+<meta name="twitter:description" content="An interactive essay on the information geometry of state–action occupancy measures in reinforcement learning.">
+<meta name="twitter:image" content="{{ '/assets/images/portrait.jpg' | absolute_url }}">
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title="Nikola Milosevic" href="{{ '/feed.xml' | absolute_url }}">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false});"></script>
+
+<style>
+  :root{
+    --bg:#ffffff; --text:#1c1c1a; --muted:#56564f; --faint:#8a8a82;
+    --border:rgba(0,0,0,0.12); --card:#f5f5f1; --accent:#0F6E56;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#16171a; --text:#e7e6e1; --muted:#aeaea6; --faint:#7d7d76;
+      --border:rgba(255,255,255,0.15); --card:#212226; --accent:#5DCAA5;
+    }
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);}
+  body{
+    font-family:Georgia,Cambria,"Times New Roman",serif;
+    font-size:18px; line-height:1.72;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:3.5rem 1.25rem 5rem;}
+  h1,h2,h3,.byline,.caption,.controls,.cards,.tag{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  }
+  h1{font-size:2.05rem;line-height:1.18;font-weight:600;letter-spacing:-0.01em;margin:0 0 0.5rem;}
+  h2{font-size:1.35rem;font-weight:600;margin:2.8rem 0 0.8rem;letter-spacing:-0.01em;}
+  .byline{color:var(--faint);font-size:0.9rem;margin:0 0 2.4rem;}
+  p{margin:1.1rem 0;}
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 35%,transparent);}
+  a:hover{border-bottom-color:var(--accent);}
+  em{font-style:italic;}
+  strong{font-weight:600;}
+  .lead{font-size:1.12rem;color:var(--muted);}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:0.86em;background:var(--card);padding:0.1em 0.35em;border-radius:4px;}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0;}
+  figure{margin:2rem 0;}
+  .panel{
+    border:1px solid var(--border);border-radius:14px;
+    padding:1.4rem 1.4rem 1.1rem;background:var(--bg);
+  }
+  .caption{font-size:0.86rem;color:var(--faint);margin:0.7rem 0 0;line-height:1.55;}
+  .controls{display:grid;grid-template-columns:1fr;gap:10px;margin:0.4rem 0 1rem;}
+  .controls.two{grid-template-columns:1fr 1fr;gap:10px 18px;}
+  .ctl{display:flex;align-items:center;gap:12px;}
+  .ctl label{font-size:0.82rem;color:var(--muted);min-width:78px;}
+  .ctl .out{font-size:0.84rem;font-weight:600;min-width:34px;text-align:right;color:var(--text);}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px;margin-top:0.4rem;}
+  .card{background:var(--card);border-radius:9px;padding:0.75rem 0.85rem;}
+  .card .k{font-size:0.78rem;color:var(--muted);}
+  .card .v{font-size:1.35rem;font-weight:600;margin-top:2px;font-family:-apple-system,system-ui,sans-serif;}
+  input[type=range]{
+    -webkit-appearance:none;appearance:none;flex:1;height:4px;
+    background:var(--border);border-radius:2px;outline:none;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;
+    background:var(--accent);cursor:pointer;border:2px solid var(--bg);
+  }
+  input[type=range]::-moz-range-thumb{
+    width:18px;height:18px;border-radius:50%;background:var(--accent);
+    cursor:pointer;border:2px solid var(--bg);
+  }
+  svg{display:block;width:100%;height:auto;}
+  .tag{display:inline-block;font-size:0.72rem;letter-spacing:0.04em;text-transform:uppercase;
+    color:var(--faint);border:1px solid var(--border);border-radius:999px;padding:2px 10px;margin-bottom:1.2rem;}
+  hr{border:none;border-top:1px solid var(--border);margin:3rem 0;}
+  .home-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    font-size:0.84rem;font-weight:500;
+    color:var(--muted);border:1px solid var(--border);border-bottom:1px solid var(--border);
+    border-radius:999px;padding:4px 14px;margin-bottom:2rem;
+    text-decoration:none;transition:color 0.15s,border-color 0.15s;
+  }
+  .home-btn:hover{color:var(--accent);border-color:var(--accent);}
+  .share-row{display:flex;align-items:center;gap:10px;margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--border);flex-wrap:wrap;}
+  .share-label{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;font-size:0.82rem;color:var(--faint);margin-right:4px;}
+  .share-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    font-size:0.82rem;font-weight:500;
+    color:var(--muted);border:1px solid var(--border);border-radius:999px;
+    padding:4px 14px;text-decoration:none;border-bottom:1px solid var(--border);
+    transition:color 0.15s,border-color 0.15s;
+  }
+  .share-btn:hover{color:var(--accent);border-color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="{{ '/' | relative_url }}" class="home-btn">&#8592; Home</a>
+
+  <span class="tag">Interactive essay</span>
+  <h1>The hidden geometry of occupancy measures</h1>
+  <p class="byline">Nikola Milosevic &middot; June 2026 &middot; Reinforcement learning, information geometry</p>
+
+  <p class="lead">In reinforcement learning, almost every quantity one cares about (expected return, safety costs, exploration bonuses) is a functional of a single object: the state&ndash;action occupancy measure. That makes the space of occupancy measures the natural arena for RL, and it comes equipped with a geometry. This post is the beginning of a series that explores the shape of that space and what it can tell us about decision problems and the design of learning algorithms. In this first post, we'll see how the Bellman equations bend an otherwise flat probability space into a curved surface by coupling the policy to the states it visits.</p>
+
+  <h2>The occupancy measure</h2>
+
+  <p>Fix a finite Markov decision process with state space $\mathcal{S}$, action space $\mathcal{A}$, transition kernel $P(s' \mid s,a)$, reward $r : \mathcal{S}\times\mathcal{A}\to\mathbb{R}$, initial-state distribution $\mu \in \Delta(\mathcal{S})$, and discount $\gamma\in(0,1)$.</p>
+
+  <p>A transparent way to package a policy's long-run behaviour is through a generative model. Draw a random horizon $T \sim \mathrm{Geom}(1-\gamma)$, so that $\Pr(T = t) = (1-\gamma)\gamma^t$; run $\pi$ from $\mu$ for exactly $T$ steps; record the terminal pair $(S_T, A_T)$. Its law is</p>
+
+  $$\omega^\pi(s,a) \;=\; \sum_{t=0}^{\infty}(1-\gamma)\gamma^t\,\Pr_\pi(S_t = s,\, A_t = a \mid S_0 \sim \mu),$$
+
+  <p>a genuine probability distribution on $\mathcal{S}\times\mathcal{A}$, normalised by construction. This is the <strong>discounted state&ndash;action occupancy measure</strong> of $\pi$. (Equivalently it is the stationary state&ndash;action marginal of the chain augmented with an absorbing state entered with probability $1-\gamma$ at each step; the mixture view is simply more transparent about normalisation.)</p>
+
+  <p>The occupancy is useful because the return is <em>linear</em> in it,</p>
+
+  $$J(\pi) \;=\; \mathbb{E}_\pi\!\left[\sum_{t=0}^\infty \gamma^t\, r(S_t,A_t)\right] \;=\; \frac{1}{1-\gamma}\,\langle r,\, \omega^\pi\rangle, \quad \langle r,\omega\rangle := \sum_{s,a} r(s,a)\,\omega(s,a).$$
+
+  <p>The bracket $\langle r,\omega\rangle$ pairs two objects of different type: $r$ is a <em>function</em> on $\mathcal{S}\times\mathcal{A}$, while $\omega$ is a <em>measure</em> on it. The pairing requires no inner product, no notion of length or angle, only the duality between functions and measures. Reward and occupancy live in dual spaces, and the return is their contraction. Because $J$ is linear in $\omega$, the occupancy is a sufficient statistic for policy optimisation, and the set of achievable occupancies is where the geometry must be studied.</p>
+
+  <p>Which distributions arise as occupancies? Exactly those satisfying the <strong>Bellman flow equations</strong>,</p>
+
+  $$\sum_{a} \omega(s,a) \;=\; (1-\gamma)\,\mu(s) \;+\; \gamma \sum_{s',a'} P(s \mid s', a')\,\omega(s', a'), \qquad \forall s,$$
+
+  <p>a conservation-of-flow condition: the mass entering $s$ (initial plus discounted transitions) equals the mass leaving it. Any $\omega$ in the simplex meeting these constraints is the occupancy of the policy $\pi(a \mid s) = \omega(s,a)/\sum_{a'}\omega(s,a')$. Write $\mathcal{O}$ for the resulting set: the <strong>occupancy polytope</strong>, an affine slice of $\Delta(\mathcal{S}\times\mathcal{A})$. We approach its geometry in two stages: first the ambient simplex with no dynamics, then the warp the Bellman equations impose.</p>
+
+  <h2>A product simplex, and its warp</h2>
+
+  <p>Before dynamics enters, there is a purely kinematic fact about $\Delta(\mathcal{S}\times\mathcal{A})$. Any joint distribution factors as</p>
+
+  $$\omega(s,a) \;=\; \rho(s)\,\pi(a\mid s), \qquad \rho(s) = \sum_a \omega(s,a),$$
+
+  <p>into a state marginal $\rho \in \Delta(\mathcal{S})$ and a conditional policy $\pi(\cdot\mid s) \in \Delta(\mathcal{A})$ for each state. The <strong>Fisher&ndash;Rao metric</strong> on the simplex, the inner product $g_\omega(u,v) = \sum_{s,a} u(s,a)\,v(s,a)/\omega(s,a)$ on tangent vectors, then decomposes along this factorisation into two blocks that are <strong>orthogonal at every point</strong>:</p>
+
+  $$g_\omega \;=\; \underbrace{g^{\mathcal{S}}_{\rho}}_{\text{marginal block}} \;\oplus\; \underbrace{\sum_{s} \rho(s)\, g^{\mathcal{A}}_{\pi(\cdot\mid s)}}_{\text{conditional block}}.$$
+
+  <p>This is the chain rule for Fisher information, and it has a probabilistic reading. The conditional block is exactly Kakade's natural-policy-gradient metric. The weight $\rho(s)$ in front of each fibre is not an arbitrary choice: it is the visitation probability, which by the law of total variance is exactly how much state $s$ contributes to the overall variance of a function on $\mathcal{S}\times\mathcal{A}$. The cost of varying the policy at $s$ is proportional to how often you visit $s$. This structure is called a <strong>warped product</strong>: a base manifold (the state marginals $\Delta(\mathcal{S})$) fibred over policy space ($\prod_s \Delta(\mathcal{A})$), the fibre metric at each base point scaled by the base coordinate.</p>
+
+  <p>For two states and two actions the interior is parameterised by $(\beta, p, q)$, with $\beta = \rho(s_1)$ the free state marginal and $p = \pi(a_1\mid s_0)$, $q = \pi(a_1\mid s_1)$ the policy parameters. The metric reads</p>
+
+  $$ g \;=\; \underbrace{\frac{\mathrm{d}\beta^2}{\beta(1-\beta)}}_{\text{marginal block}} \;+\; \underbrace{(1-\beta)\,\frac{\mathrm{d}p^2}{p(1-p)} \;+\; \beta\,\frac{\mathrm{d}q^2}{q(1-q)}}_{\text{conditional block}}, $$
+
+  <p>so the fibre ellipse has semi-axes $\sqrt{1-\beta}$ and $\sqrt{\beta}$: visiting $s_1$ more often compresses the $s_0$-fibre and expands the $s_1$-fibre. Drag $\beta$ below.</p>
+
+  <figure>
+    <div class="panel">
+      <svg id="fw-svg" viewBox="0 0 680 430" role="img" aria-label="A base interval for the state marginal with a conditional-policy fibre drawn as an ellipse that flattens or grows as the marginal shifts.">
+        <text x="70" y="42" style="fill:var(--muted);font-size:13px;font-family:sans-serif">state marginal &#916;(S)</text>
+        <line x1="90" y1="115" x2="590" y2="115" stroke="#7F77DD" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="90" cy="115" r="4" fill="#7F77DD"/><circle cx="590" cy="115" r="4" fill="#7F77DD"/>
+        <text x="80" y="146" text-anchor="middle" style="fill:var(--muted);font-size:13px;font-family:sans-serif">s&#8320;</text>
+        <text x="600" y="146" text-anchor="middle" style="fill:var(--muted);font-size:13px;font-family:sans-serif">s&#8321;</text>
+        <text x="340" y="146" text-anchor="middle" style="fill:var(--faint);font-size:12px;font-family:sans-serif">&#946; = &#961;(s&#8321;)</text>
+        <g id="fw-ghosts" stroke="#1D9E75" fill="#1D9E75" fill-opacity="0.08" stroke-opacity="0.45" stroke-width="1"></g>
+        <ellipse id="fw-strip" cx="340" cy="115" rx="17" ry="17" fill="#1D9E75" fill-opacity="0.22" stroke="#0F6E56" stroke-width="1.5"/>
+        <line id="fw-marker" x1="340" y1="92" x2="340" y2="138" stroke="#534AB7" stroke-width="1.5"/>
+        <path id="fw-tip" d="M333 86 L347 86 L340 95 Z" fill="#534AB7"/>
+        <line x1="90" y1="190" x2="590" y2="190" stroke="var(--border)" stroke-width="1"/>
+        <text x="70" y="226" style="fill:var(--muted);font-size:13px;font-family:sans-serif">conditional fibre over &#946;</text>
+        <rect x="270" y="250" width="140" height="140" rx="6" fill="none" stroke="var(--border)" stroke-width="1"/>
+        <line x1="270" y1="320" x2="410" y2="320" stroke="var(--border)" stroke-width="0.75"/>
+        <line x1="340" y1="250" x2="340" y2="390" stroke="var(--border)" stroke-width="0.75"/>
+        <ellipse id="fw-fibre" cx="340" cy="320" rx="45" ry="45" fill="#1D9E75" fill-opacity="0.18" stroke="#0F6E56" stroke-width="1.5"/>
+        <line id="fw-axp" x1="340" y1="320" x2="385" y2="320" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"/>
+        <line id="fw-axq" x1="340" y1="320" x2="340" y2="275" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"/>
+        <text x="424" y="324" style="fill:var(--muted);font-size:12px;font-family:sans-serif">p = &#960;(a&#8321;|s&#8320;)</text>
+        <text x="340" y="408" text-anchor="middle" style="fill:var(--faint);font-size:12px;font-family:sans-serif">fibre direction s&#8320; &#8226; scaled by 1&#8722;&#946;</text>
+        <text x="246" y="264" text-anchor="end" style="fill:var(--muted);font-size:12px;font-family:sans-serif">q = &#960;(a&#8321;|s&#8321;)</text>
+        <text x="246" y="282" text-anchor="end" style="fill:var(--faint);font-size:12px;font-family:sans-serif">scaled by &#946;</text>
+      </svg>
+      <div class="controls">
+        <div class="ctl"><label>&#946; = &#961;(s&#8321;)</label><input type="range" id="fw-beta" min="0.02" max="0.98" step="0.01" value="0.5"><span class="out" id="fw-beta-out">0.50</span></div>
+      </div>
+      <div class="cards">
+        <div class="card"><div class="k">visits s&#8320;: &#961;(s&#8320;)</div><div class="v" id="fw-ds0">0.50</div></div>
+        <div class="card"><div class="k">visits s&#8321;: &#961;(s&#8321;)</div><div class="v" id="fw-ds1">0.50</div></div>
+        <div class="card"><div class="k">s&#8320;-fibre scale &#8730;(1&#8722;&#946;)</div><div class="v" id="fw-fp">0.71</div></div>
+        <div class="card"><div class="k">s&#8321;-fibre scale &#8730;&#946;</div><div class="v" id="fw-fq">0.71</div></div>
+      </div>
+    </div>
+    <p class="caption">As $\beta \to 0$ the $s_1$-fibre axis collapses: when $s_1$ is almost never visited, varying $\pi(\cdot\mid s_1)$ barely shifts the occupancy, so it carries almost no Fisher cost. The axes stay perpendicular; only their lengths change. That is the warp, and the perpendicularity is the orthogonal (within/between) decomposition of the Fisher information.</p>
+  </figure>
+
+  <h2>Now let the dynamics in</h2>
+
+  <p>So far there is no MDP, only a product simplex with $\beta, p, q$ as <em>free</em> parameters. The dynamics enter not as a new metric but as a <em>constraint</em>. Collect the Bellman flow into a linear operator $B$ acting on measures, so that the achievable set is $\mathcal{O} = \{\omega : B\omega = (1-\gamma)\mu\}$. Given a policy $(p,q)$ the marginal $\beta$ is then <strong>uniquely determined</strong>: it is no longer free. The occupancy polytope is the graph of the forced marginal $\beta = \beta(p,q)$, a two-dimensional surface inside the three-dimensional cube.</p>
+
+  <p>For a two-state recurrent MDP (from $s_0$, action $a_1$ moves to $s_1$ with probability $p$; from $s_1$, action $a_1$ returns to $s_0$ with probability $q$) the flow equations at $\gamma = 0.9$ give</p>
+
+  $$ \beta(p,q) \;=\; \rho(s_1) \;=\; \frac{\gamma\,p}{(1-\gamma)+\gamma(p+q)}, $$
+
+  <p>increasing in $p$ and decreasing in $q$. Below, the floor is policy space, freely parameterised by $(p,q)$; the teal sheet is $\mathcal{O}$, lifted off the floor by $\beta(p,q)$; the dashed line is the lift of the current policy; the purple ellipse is the conditional block, lying in the horizontal plane; the green arrow is the marginal block, perpendicular to it.</p>
+
+  <figure>
+    <div class="panel">
+      <svg id="cs-svg" viewBox="0 0 680 340" role="img" aria-label="A 3D cube whose floor is policy space and whose vertical axis is the forced state marginal. The occupancy manifold is a shaded surface rising off the floor; moving the policy lifts a point up the surface, re-warps a policy ellipse lying parallel to the floor, and rescales a perpendicular green arrow encoding the marginal block.">
+        <defs>
+          <marker id="cs-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <g id="cs-ambient" stroke="var(--border)" stroke-width="1" fill="none"></g>
+        <g id="cs-floor" stroke="#7F77DD" stroke-width="1.2" fill="#7F77DD" fill-opacity="0.05"></g>
+        <g id="cs-surffill"></g>
+        <g id="cs-surface" stroke="#1D9E75" stroke-width="1" fill="none" stroke-opacity="0.8"></g>
+        <line id="cs-baxis" x1="115" y1="235" x2="115" y2="85" stroke="var(--muted)" stroke-width="1" marker-end="url(#cs-arrow)"/>
+        <line id="cs-lift" x1="0" y1="0" x2="0" y2="0" stroke="#534AB7" stroke-width="1.4" stroke-dasharray="4 3"/>
+        <circle id="cs-pol" cx="0" cy="0" r="4.5" fill="#534AB7"/>
+        <ellipse id="cs-fisher" cx="0" cy="0" rx="1" ry="1" fill="#7F77DD" fill-opacity="0.20" stroke="#534AB7" stroke-width="1.5" vector-effect="non-scaling-stroke" transform="matrix(20,0,0,20,300,200)"/>
+        <line id="cs-axp" x1="0" y1="0" x2="0" y2="0" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/>
+        <line id="cs-axq" x1="0" y1="0" x2="0" y2="0" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/>
+        <circle id="cs-occ" cx="0" cy="0" r="4.5" fill="#0F6E56"/>
+        <line id="cs-marg" x1="0" y1="0" x2="0" y2="0" stroke="#0F6E56" stroke-width="2.5" stroke-linecap="round" marker-end="url(#cs-arrow)"/>
+        <path id="cs-margcap" d="" fill="none" stroke="#0F6E56" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+        <text x="107" y="98" text-anchor="end" style="fill:var(--faint);font-size:12px;font-family:sans-serif">&#946; = &#961;(s&#8321;)</text>
+        <text id="cs-lp" x="0" y="0" style="fill:var(--muted);font-size:12px;font-family:sans-serif">p = &#960;(a&#8321;|s&#8320;)</text>
+        <text id="cs-lq" x="0" y="0" style="fill:var(--muted);font-size:12px;font-family:sans-serif">q = &#960;(a&#8321;|s&#8321;)</text>
+        <text x="455" y="66" style="fill:var(--faint);font-size:12px;font-family:sans-serif">teal sheet = occupancy manifold</text>
+        <text x="455" y="84" style="fill:var(--faint);font-size:12px;font-family:sans-serif">cube = all joint distributions</text>
+      </svg>
+      <div class="controls two">
+        <div class="ctl"><label>p = &#960;(a&#8321;|s&#8320;)</label><input type="range" id="cs-p" min="0.02" max="0.98" step="0.01" value="0.5"><span class="out" id="cs-p-out">0.50</span></div>
+        <div class="ctl"><label>q = &#960;(a&#8321;|s&#8321;)</label><input type="range" id="cs-q" min="0.02" max="0.98" step="0.01" value="0.5"><span class="out" id="cs-q-out">0.50</span></div>
+      </div>
+      <div class="cards">
+        <div class="card"><div class="k">forced &#946; = &#961;(s&#8321;)</div><div class="v" id="cs-b">0.45</div></div>
+        <div class="card"><div class="k">&#961;(s&#8320;) = 1&#8722;&#946;</div><div class="v" id="cs-b0">0.55</div></div>
+        <div class="card"><div class="k">s&#8320;-fibre scale &#8730;(1&#8722;&#946;)</div><div class="v" id="cs-fp">0.74</div></div>
+        <div class="card"><div class="k">s&#8321;-fibre scale &#8730;&#946;</div><div class="v" id="cs-fq">0.67</div></div>
+        <div class="card"><div class="k">marginal warp 1/&#8730;(&#946;(1&#8722;&#946;))</div><div class="v" id="cs-fm">2.01</div></div>
+      </div>
+    </div>
+    <p class="caption">Increasing $p$ pushes mass toward $s_1$, so the occupancy point climbs the sheet; increasing $q$ returns it to $s_0$, so it sinks. The lift height is $\beta(p,q)$, set by the Bellman solve: the policy is free, the marginal is not. The purple ellipse is the conditional block, in the horizontal policy plane; the green arrow is the marginal block, perpendicular in the ambient cube. Near the boundary the ellipse collapses in one direction while the arrow diverges (capped with a chevron when it leaves the frame): the conditional block shrinking and the marginal block blowing up are the same boundary singularity, viewed at right angles.</p>
+  </figure>
+
+  <h2>The warp is the coupling</h2>
+
+  <p>Pulling the ambient Fisher metric back to $\mathcal{O}$ through the embedding $(p,q)\mapsto \omega^\pi$ means substituting $\mathrm{d}\beta = \beta_p\,\mathrm{d}p + \beta_q\,\mathrm{d}q$ into the ambient metric, giving</p>
+
+  $$ g_{\mathcal{O}} \;=\; \underbrace{\frac{(\beta_p\,\mathrm{d}p + \beta_q\,\mathrm{d}q)^2}{\beta(1-\beta)}}_{\text{marginal (tilt) contribution}} \;+\; \underbrace{(1-\beta)\,\frac{\mathrm{d}p^2}{p(1-p)} \;+\; \beta\,\frac{\mathrm{d}q^2}{q(1-q)}}_{\text{conditional block}}. $$
+
+  <p><strong>Orthogonality is ambient, not induced.</strong> In the full cube the marginal and conditional blocks are separate summands with no cross term. On the occupancy surface this is <em>broken</em>, because $\beta$ is now slaved to $(p,q)$: the marginal contribution supplies a cross term $\beta_p\beta_q\,\mathrm{d}p\,\mathrm{d}q/(\beta(1-\beta))$. The two glyphs in the figure depict the ambient orthogonality; the actual geodesics on $\mathcal{O}$ mix both blocks.</p>
+
+  <p><strong>The warp is the coupling.</strong> The slopes $(\beta_p,\beta_q)$, measuring how steeply the Bellman map lifts the sheet, are the coupling coefficients. A policy change drags the visitation by $\mathrm{d}\beta = \beta_p\,\mathrm{d}p + \beta_q\,\mathrm{d}q$; this <em>visitation drag</em> feeds back through the $1/(\beta(1-\beta))$ factor, which diverges at the boundary. Reaching a deterministic policy costs infinite Fisher length precisely because $\beta \to 0$ or $1$ there. The same factor $\rho(s)$ that shrinks a rarely-visited fibre in the conditional block is what down-weights that state in Kakade's gradient; a fibre axis collapsing and the marginal block blowing up are one boundary singularity seen at right angles.</p>
+
+  <p>The drag term is exactly what Kakade's metric omits: the natural policy gradient uses the conditional block alone and drops the marginal contribution, treating the visitation as if it were frozen. The gap between the two is not opaque. The visitation sensitivity admits a Neumann expansion in the transition kernel,</p>
+
+  $$ \mathrm{d}\rho \;=\; \gamma \sum_{k\ge 0}\gamma^k\, T_\pi^{k}\,(\delta T)\,\rho, $$
+
+  <p>a discounted sum of a one-step kick propagated $k$ steps forward under the current dynamics. Truncating the sum at order $K$ interpolates between Kakade's metric ($K=-1$, drop the drag entirely) and the exact pullback ($K=\infty$), with error decaying like $\gamma^{K+1}$; each retained term is one rollout of the model. The Kakade metric is thus the zeroth member of a hierarchy, and the drag is the tail one chooses how much of to keep.</p>
+
+  <h2>The occupancy polytope is stratified too</h2>
+
+  <p>The Fisher&ndash;Rao metric degenerates at the boundary of the simplex, where some $\omega(s,a) \to 0$: the denominator blows up, and the closed simplex is not a Riemannian manifold. The correct structure is a <strong>stratified Riemannian space</strong>, a union of manifolds indexed by support sets, each carrying its own nondegenerate Fisher metric, glued along the face lattice. The simplest example is $\Delta^2$, with its $2^3-1=7$ strata. Pull them apart below.</p>
+
+  <figure>
+    <div class="panel">
+      <svg id="tri-svg" viewBox="0 0 680 390" role="img" aria-label="Exploded view of the closed triangle stratified into one interior 2-cell, three edge 1-cells, and three vertex 0-cells, with faint incidence lines showing the closure order.">
+        <title>The probability simplex as a stratified Riemannian space</title>
+        <desc>Dragging the explode control separates the closed triangle into its interior, three edges, and three vertices; dashed lines show which lower cells lie in the closure of which higher cells.</desc>
+        <defs>
+          <marker id="tri-tick" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M3 2L7 5L3 8" fill="none" stroke="context-stroke" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <g id="tri-incidence"></g>
+        <polygon id="tri-interior" points="" fill="#1D9E75" fill-opacity="0.14" stroke="#0F6E56" stroke-width="1"/>
+        <g id="tri-cues"></g>
+        <g id="tri-edges"></g>
+        <g id="tri-verts"></g>
+        <g id="tri-labels"></g>
+      </svg>
+      <div style="display:flex;align-items:center;gap:12px;margin:8px 0 12px">
+        <span style="font-size:13px;color:var(--muted);min-width:58px">assembled</span>
+        <input type="range" id="tri-e" min="0" max="1" step="0.01" value="0.5" style="flex:1">
+        <span style="font-size:13px;color:var(--muted);min-width:58px;text-align:right">exploded</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;font-size:12.5px;color:var(--muted)">
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:12px;border-radius:3px;background:#1D9E75;opacity:0.55;border:1px solid #0F6E56"></span>2-cell &middot; interior &middot; dim 2</span>
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:3px;border-radius:2px;background:#7F77DD"></span>1-cells &middot; edges &middot; dim 1</span>
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#EF9F27;border:1px solid #BA7517"></span>0-cells &middot; vertices &middot; dim 0</span>
+      </div>
+    </div>
+    <p class="caption">The seven pieces are the strata, indexed by support set. Dashed lines show the closure order (the face lattice). On each stratum the restricted Fisher metric is nondegenerate; the blow-up of the ambient metric at the boundary is the logarithm's singularity, not a property of the geometry itself.</p>
+  </figure>
+
+  <p>The same stratification applies to $\mathcal{O}$, now with an MDP reading for each stratum. With full-support $\mu$ the two-state two-action polytope is a quadrilateral, an affine slice of the tetrahedron $\Delta^3(\mathcal{S}\times\mathcal{A})$ cut out by the flow equations. Pull it apart below.</p>
+
+  <figure>
+    <div class="panel">
+      <svg id="occ-svg" viewBox="0 0 680 400" role="img" aria-label="Exploded view of the occupancy polytope: a quadrilateral with one interior 2-cell, four edge 1-cells each pinning one state's action to a sub-MDP, and four vertex 0-cells that are the deterministic policies.">
+        <title>The occupancy polytope as a stratified space of sub-MDPs</title>
+        <desc>Dragging the explode control separates the quadrilateral occupancy polytope into its interior, four edges (each a sub-MDP with one state's action pinned), and four vertices (the deterministic policies).</desc>
+        <defs>
+          <marker id="occ-tick" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M3 2L7 5L3 8" fill="none" stroke="context-stroke" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <g id="occ-incidence"></g>
+        <polygon id="occ-interior" points="" fill="#1D9E75" fill-opacity="0.14" stroke="#0F6E56" stroke-width="1"/>
+        <g id="occ-cues"></g>
+        <g id="occ-edges"></g>
+        <g id="occ-verts"></g>
+        <g id="occ-labels"></g>
+      </svg>
+      <div style="display:flex;align-items:center;gap:12px;margin:8px 0 12px">
+        <span style="font-size:13px;color:var(--muted);min-width:58px">assembled</span>
+        <input type="range" id="occ-e" min="0" max="1" step="0.01" value="0.5" style="flex:1">
+        <span style="font-size:13px;color:var(--muted);min-width:58px;text-align:right">exploded</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;font-size:12.5px;color:var(--muted)">
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:12px;border-radius:3px;background:#1D9E75;opacity:0.55;border:1px solid #0F6E56"></span>2-cell &middot; stochastic both states</span>
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:3px;border-radius:2px;background:#7F77DD"></span>1-cells &middot; sub-MDPs (one action pinned)</span>
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#EF9F27;border:1px solid #BA7517"></span>0-cells &middot; deterministic policies</span>
+      </div>
+    </div>
+    <p class="caption">Same grammar, MDP meaning. The four vertices are the deterministic policies $(a_i,a_j)$, each with two-coordinate support rather than a single Dirac. Each edge pins one state&rsquo;s action and frees the other: that is the occupancy polytope of a smaller MDP, so every face is itself an occupancy polytope carrying its own Fisher metric one dimension down. With $\mu$ concentrated rather than full-support the map from policies to vertices stops being injective: deterministic policies differing only at an unreachable state collapse to one vertex.</p>
+  </figure>
+
+  <p>Concretely $\mathcal{O}$ is a planar cross-section of $\Delta^3(\mathcal{S}\times\mathcal{A})$. Each vertex (a deterministic policy) lands on an <em>edge</em> of the tetrahedron, the two-coordinate-support stratum for that policy; the interior of $\mathcal{O}$ lies in the interior of $\Delta^3$. The figure below pulls the slice apart, tethering each vertex to the simplex edge it came from.</p>
+
+  <figure>
+    <div class="panel">
+      <svg id="emb-svg" viewBox="0 0 680 360" role="img" aria-label="The occupancy polytope drawn as a planar cross-section inside a faint wireframe tetrahedron; exploding the slice lifts each vertex out toward the tetrahedron edge it sits on.">
+        <title>The occupancy polytope as a cross-section of the simplex</title>
+        <desc>A faint tetrahedron over the four state-action coordinates, with the quadrilateral occupancy polytope as a planar slice; the explode control lifts the slice's cells out, each vertex tethered to its host edge of the tetrahedron.</desc>
+        <defs>
+          <marker id="emb-tick" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M3 2L7 5L3 8" fill="none" stroke="context-stroke" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <g id="emb-tetra"></g>
+        <g id="emb-anchors"></g>
+        <g id="emb-tethers"></g>
+        <polygon id="emb-interior" points="" fill="#1D9E75" fill-opacity="0.16" stroke="#0F6E56" stroke-width="1"/>
+        <g id="emb-cues"></g>
+        <g id="emb-edges"></g>
+        <g id="emb-verts"></g>
+        <g id="emb-clabels"></g>
+        <g id="emb-labels"></g>
+      </svg>
+      <div style="display:flex;align-items:center;gap:12px;margin:8px 0 12px">
+        <span style="font-size:13px;color:var(--muted);min-width:58px">in place</span>
+        <input type="range" id="emb-e" min="0" max="1" step="0.01" value="0.45" style="flex:1">
+        <span style="font-size:13px;color:var(--muted);min-width:58px;text-align:right">exploded</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;font-size:12.5px;color:var(--muted)">
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:18px;border-top:1px dashed var(--faint)"></span>tetrahedron &#916;&#179; over (s,a)</span>
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:12px;border-radius:3px;background:#1D9E75;opacity:0.55;border:1px solid #0F6E56"></span>occupancy slice</span>
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:11px;height:11px;border-radius:50%;background:#EF9F27;border:1px solid #BA7517"></span>policy on a simplex edge</span>
+      </div>
+    </div>
+    <p class="caption">$\mathcal{O}$ is the affine slice of the tetrahedron cut out by the flow equations. Its four vertices rest on four of the six edges of $\Delta^3$; the amber tethers mark which. The two untouched edges are the &ldquo;same-state&rdquo; supports $\{s_0a_0,s_0a_1\}$ and $\{s_1a_0,s_1a_1\}$: with full-support $\mu$ no occupancy can put all its mass on one state, so those strata stay empty. The slice&rsquo;s own stratification is the trace of the simplex&rsquo;s stratification on the cutting plane.</p>
+  </figure>
+
+  <p>What this essay has not done is ask which metric on $\mathcal{O}$ is the <em>right</em> one. On a bare simplex the answer is essentially unique: Chentsov's theorem singles out the Fisher&ndash;Rao metric by invariance. On the occupancy polytope, because the Bellman equations couple states to actions, the symmetry group splits and uniqueness fails; the visitation drag term and the Kakade metric are independently invariant, leaving a genuine choice. That story, together with the cleaner algebraic treatment via the Fisher cometric and its relationship to reward shaping and value-function baselines, is the subject of the next post.</p>
+</div>
+
+<script>
+(function(){
+  var NS="http://www.w3.org/2000/svg";
+  function poly(g,pts,attrs){
+    var e=document.createElementNS(NS,"polyline");
+    e.setAttribute("points",pts.map(function(a){return a[0].toFixed(1)+","+a[1].toFixed(1);}).join(" "));
+    if(attrs) for(var k in attrs) e.setAttribute(k,attrs[k]);
+    g.appendChild(e); return e;
+  }
+
+  /* ---------- Figure: fibre warp ---------- */
+  (function(){
+    var ghosts=document.getElementById("fw-ghosts");
+    for(var k=1;k<=9;k++){
+      var b=k/10, cx=90+b*500, rx=24*Math.sqrt(1-b), ry=24*Math.sqrt(b);
+      var e=document.createElementNS(NS,"ellipse");
+      e.setAttribute("cx",cx);e.setAttribute("cy",115);
+      e.setAttribute("rx",rx.toFixed(2));e.setAttribute("ry",ry.toFixed(2));
+      ghosts.appendChild(e);
+    }
+    var s=document.getElementById("fw-beta");
+    function upd(){
+      var b=parseFloat(s.value);
+      var cx=90+b*500, srx=24*Math.sqrt(1-b), sry=24*Math.sqrt(b);
+      var sc=document.getElementById("fw-strip");
+      sc.setAttribute("cx",cx.toFixed(2));
+      sc.setAttribute("rx",Math.max(srx,1.5).toFixed(2));
+      sc.setAttribute("ry",Math.max(sry,1.5).toFixed(2));
+      var mk=document.getElementById("fw-marker");
+      mk.setAttribute("x1",cx.toFixed(2));mk.setAttribute("x2",cx.toFixed(2));
+      document.getElementById("fw-tip").setAttribute("d","M"+(cx-7)+" 86 L"+(cx+7)+" 86 L"+cx+" 95 Z");
+      var rx=64*Math.sqrt(1-b), ry=64*Math.sqrt(b);
+      var fe=document.getElementById("fw-fibre");
+      fe.setAttribute("rx",Math.max(rx,1.5).toFixed(2));
+      fe.setAttribute("ry",Math.max(ry,1.5).toFixed(2));
+      document.getElementById("fw-axp").setAttribute("x2",(340+rx).toFixed(2));
+      document.getElementById("fw-axq").setAttribute("y2",(320-ry).toFixed(2));
+      document.getElementById("fw-beta-out").textContent=b.toFixed(2);
+      document.getElementById("fw-ds0").textContent=(1-b).toFixed(2);
+      document.getElementById("fw-ds1").textContent=b.toFixed(2);
+      document.getElementById("fw-fp").textContent=Math.sqrt(1-b).toFixed(2);
+      document.getElementById("fw-fq").textContent=Math.sqrt(b).toFixed(2);
+    }
+    s.addEventListener("input",upd); upd();
+  })();
+
+  /* ---------- Figure: coupled surface in cube (beta = vertical height) ---------- */
+  (function(){
+    var ox=115, oy=235, Px=195, Py=-30, Qx=120, Qy=54, Bh=150, G=0.9, K=34;
+    function proj(p,q,b){ return [ ox + p*Px + q*Qx, oy + p*Py + q*Qy - b*Bh ]; }
+    function betaFn(p,q){ return G*p/((1-G)+G*(p+q)); }
+
+    var C=[[0,0,0],[1,0,0],[1,1,0],[0,1,0],[0,0,1],[1,0,1],[1,1,1],[0,1,1]];
+    var Pj=C.map(function(c){return proj(c[0],c[1],c[2]);});
+    var Edges=[[0,4],[1,5],[2,6],[3,7],[4,5],[5,6],[6,7],[7,4]];
+    var amb=document.getElementById("cs-ambient");
+    Edges.forEach(function(e){ poly(amb,[Pj[e[0]],Pj[e[1]]]); });
+
+    var floor=document.getElementById("cs-floor");
+    poly(floor,[proj(0,0,0),proj(1,0,0),proj(1,1,0),proj(0,1,0),proj(0,0,0)]);
+
+    var ps=[0,0.2,0.4,0.6,0.8,1], qs=[0,0.25,0.5,0.75,1];
+    var fillg=document.getElementById("cs-surffill");
+    for(var i=0;i<ps.length-1;i++){ for(var j=0;j<qs.length-1;j++){
+      var A=proj(ps[i],qs[j],betaFn(ps[i],qs[j]));
+      var B=proj(ps[i+1],qs[j],betaFn(ps[i+1],qs[j]));
+      var Cc=proj(ps[i+1],qs[j+1],betaFn(ps[i+1],qs[j+1]));
+      var D=proj(ps[i],qs[j+1],betaFn(ps[i],qs[j+1]));
+      var pg=document.createElementNS(NS,"polygon");
+      pg.setAttribute("points",[A,B,Cc,D].map(function(z){return z[0].toFixed(1)+","+z[1].toFixed(1);}).join(" "));
+      pg.setAttribute("fill","#1D9E75"); pg.setAttribute("fill-opacity","0.10"); pg.setAttribute("stroke","none");
+      fillg.appendChild(pg);
+    }}
+    var surf=document.getElementById("cs-surface");
+    qs.forEach(function(q){ poly(surf, ps.map(function(p){return proj(p,q,betaFn(p,q));})); });
+    ps.forEach(function(p){ poly(surf, qs.map(function(q){return proj(p,q,betaFn(p,q));})); });
+
+    var fp=proj(1,0,0), fq=proj(0,1,0);
+    var lp=document.getElementById("cs-lp"); lp.setAttribute("x",(fp[0]+6).toFixed(1)); lp.setAttribute("y",(fp[1]-6).toFixed(1));
+    var lq=document.getElementById("cs-lq"); lq.setAttribute("x",(fq[0]-18).toFixed(1)); lq.setAttribute("y",(fq[1]+18).toFixed(1));
+
+    var vp=[Px,Py], vq=[Qx,Qy];
+    var np=Math.hypot(vp[0],vp[1]), nq=Math.hypot(vq[0],vq[1]);
+    var up=[vp[0]/np,vp[1]/np], uq=[vq[0]/nq,vq[1]/nq];
+
+    var pS=document.getElementById("cs-p"), qS=document.getElementById("cs-q");
+    function upd(){
+      var p=parseFloat(pS.value), q=parseFloat(qS.value), b=betaFn(p,q);
+      var f=proj(p,q,0), o=proj(p,q,b);
+      var lift=document.getElementById("cs-lift");
+      lift.setAttribute("x1",f[0].toFixed(1));lift.setAttribute("y1",f[1].toFixed(1));
+      lift.setAttribute("x2",o[0].toFixed(1));lift.setAttribute("y2",o[1].toFixed(1));
+      document.getElementById("cs-pol").setAttribute("cx",f[0].toFixed(1));
+      document.getElementById("cs-pol").setAttribute("cy",f[1].toFixed(1));
+      document.getElementById("cs-occ").setAttribute("cx",o[0].toFixed(1));
+      document.getElementById("cs-occ").setAttribute("cy",o[1].toFixed(1));
+      var sp=K*Math.sqrt(1-b), sq=K*Math.sqrt(b);
+      var c1=[up[0]*sp,up[1]*sp], c2=[uq[0]*sq,uq[1]*sq];
+      var fe=document.getElementById("cs-fisher");
+      fe.setAttribute("transform","matrix("+c1[0].toFixed(2)+","+c1[1].toFixed(2)+","+c2[0].toFixed(2)+","+c2[1].toFixed(2)+","+o[0].toFixed(1)+","+o[1].toFixed(1)+")");
+      var axp=document.getElementById("cs-axp");
+      axp.setAttribute("x1",o[0].toFixed(1));axp.setAttribute("y1",o[1].toFixed(1));
+      axp.setAttribute("x2",(o[0]+c1[0]).toFixed(1));axp.setAttribute("y2",(o[1]+c1[1]).toFixed(1));
+      var axq=document.getElementById("cs-axq");
+      axq.setAttribute("x1",o[0].toFixed(1));axq.setAttribute("y1",o[1].toFixed(1));
+      axq.setAttribute("x2",(o[0]+c2[0]).toFixed(1));axq.setAttribute("y2",(o[1]+c2[1]).toFixed(1));
+      var Sm=13, Lmax=85;
+      var lraw=Sm/Math.sqrt(Math.max(b*(1-b),1e-6));
+      var L=Math.min(lraw,Lmax), mtopY=o[1]-L;
+      var mg=document.getElementById("cs-marg");
+      mg.setAttribute("x1",o[0].toFixed(1));mg.setAttribute("y1",o[1].toFixed(1));
+      mg.setAttribute("x2",o[0].toFixed(1));mg.setAttribute("y2",mtopY.toFixed(1));
+      var cap=document.getElementById("cs-margcap");
+      if(lraw>Lmax){
+        var cx=o[0], cy=mtopY-7;
+        cap.setAttribute("d","M"+(cx-5)+" "+(cy+4)+" L"+cx+" "+cy+" L"+(cx+5)+" "+(cy+4)+" M"+(cx-5)+" "+(cy-2)+" L"+cx+" "+(cy-6)+" L"+(cx+5)+" "+(cy-2));
+        cap.setAttribute("opacity","0.9");
+      } else { cap.setAttribute("opacity","0"); }
+      document.getElementById("cs-p-out").textContent=p.toFixed(2);
+      document.getElementById("cs-q-out").textContent=q.toFixed(2);
+      document.getElementById("cs-b").textContent=b.toFixed(2);
+      document.getElementById("cs-b0").textContent=(1-b).toFixed(2);
+      document.getElementById("cs-fp").textContent=Math.sqrt(1-b).toFixed(2);
+      document.getElementById("cs-fq").textContent=Math.sqrt(b).toFixed(2);
+      document.getElementById("cs-fm").textContent=(1/Math.sqrt(Math.max(b*(1-b),1e-6))).toFixed(2);
+    }
+    pS.addEventListener("input",upd); qS.addEventListener("input",upd); upd();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var NS="http://www.w3.org/2000/svg";
+  function build(cfg){
+    var V=cfg.V, edges=cfg.edges, shrink=cfg.shrink, OV=cfg.OV, OE=cfg.OE, P=cfg.prefix;
+    var C=[V.reduce(function(s,v){return s+v[0];},0)/V.length, V.reduce(function(s,v){return s+v[1];},0)/V.length];
+    function sub(a,b){return [a[0]-b[0],a[1]-b[1]];}
+    function add(a,b){return [a[0]+b[0],a[1]+b[1]];}
+    function mul(a,s){return [a[0]*s,a[1]*s];}
+    function mid(a,b){return [(a[0]+b[0])/2,(a[1]+b[1])/2];}
+    function nrm(a){var n=Math.hypot(a[0],a[1])||1;return [a[0]/n,a[1]/n];}
+    var dirV=V.map(function(v){return nrm(sub(v,C));});
+    var Mid=edges.map(function(e){return mid(V[e[0]],V[e[1]]);});
+    var dirM=Mid.map(function(m){return nrm(sub(m,C));});
+    function mk(tag,attrs,parent){var el=document.createElementNS(NS,tag);for(var k in attrs)el.setAttribute(k,attrs[k]);parent.appendChild(el);return el;}
+    function txt(t,sz,parent){var e=document.createElementNS(NS,"text");e.setAttribute("text-anchor","middle");e.setAttribute("style","font-family:sans-serif;font-size:"+sz+"px;fill:var(--muted)");e.textContent=t;parent.appendChild(e);return e;}
+    var gInc=document.getElementById(P+"-incidence"), gCue=document.getElementById(P+"-cues"),
+        gEdge=document.getElementById(P+"-edges"), gVert=document.getElementById(P+"-verts"),
+        gLab=document.getElementById(P+"-labels"), interior=document.getElementById(P+"-interior");
+    var edgeLines=edges.map(function(){return mk("line",{"stroke":"#7F77DD","stroke-width":3,"stroke-linecap":"round"},gEdge);});
+    var vertDots=V.map(function(){return mk("circle",{"r":5.5,"fill":"#EF9F27","stroke":"#BA7517","stroke-width":1},gVert);});
+    var fisher=mk("ellipse",{"rx":15,"ry":11,"fill":"#1D9E75","fill-opacity":0.12,"stroke":"#0F6E56","stroke-width":1},gCue);
+    var edgeTicks=edges.map(function(){return mk("line",{"stroke":"#534AB7","stroke-width":1.4,"marker-start":"url(#"+P+"-tick)","marker-end":"url(#"+P+"-tick)"},gCue);});
+    var incInt=edges.map(function(){return mk("line",{"stroke":"var(--border)","stroke-width":0.75,"stroke-dasharray":"3 3"},gInc);});
+    var incVtx=edges.map(function(){return [mk("line",{"stroke":"var(--border)","stroke-width":0.75,"stroke-dasharray":"3 3"},gInc),mk("line",{"stroke":"var(--border)","stroke-width":0.75,"stroke-dasharray":"3 3"},gInc)];});
+    var labInt=txt(cfg.interiorLabel,12.5,gLab);
+    var labEdge=edges.map(function(_,k){return txt(cfg.eLab[k],12,gLab);});
+    var labVert=V.map(function(_,i){return txt(cfg.vLab[i],12,gLab);});
+    var slider=document.getElementById(P+"-e");
+    function upd(){
+      var e=parseFloat(slider.value);
+      var Vp=V.map(function(v){return add(C,mul(sub(v,C),1-shrink*e));});
+      interior.setAttribute("points",Vp.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join(" "));
+      var aEnd=[], bEnd=[];
+      edges.forEach(function(ed,k){
+        var off=mul(dirM[k],OE*e);
+        var A=add(V[ed[0]],off), B=add(V[ed[1]],off), m=mid(A,B);
+        A=add(m,mul(sub(A,m),1-0.07*e)); B=add(m,mul(sub(B,m),1-0.07*e));
+        aEnd[k]=A; bEnd[k]=B;
+        edgeLines[k].setAttribute("x1",A[0].toFixed(1));edgeLines[k].setAttribute("y1",A[1].toFixed(1));
+        edgeLines[k].setAttribute("x2",B[0].toFixed(1));edgeLines[k].setAttribute("y2",B[1].toFixed(1));
+        var u=nrm(sub(B,A));
+        edgeTicks[k].setAttribute("x1",(m[0]-u[0]*9).toFixed(1));edgeTicks[k].setAttribute("y1",(m[1]-u[1]*9).toFixed(1));
+        edgeTicks[k].setAttribute("x2",(m[0]+u[0]*9).toFixed(1));edgeTicks[k].setAttribute("y2",(m[1]+u[1]*9).toFixed(1));
+        var lp=add(m,mul(dirM[k],17));
+        labEdge[k].setAttribute("x",lp[0].toFixed(1));labEdge[k].setAttribute("y",(lp[1]+4).toFixed(1));
+      });
+      var vpos=V.map(function(v,i){return add(v,mul(dirV[i],OV*e));});
+      vpos.forEach(function(p,i){
+        vertDots[i].setAttribute("cx",p[0].toFixed(1));vertDots[i].setAttribute("cy",p[1].toFixed(1));
+        var lp=add(p,mul(dirV[i],16));
+        labVert[i].setAttribute("x",lp[0].toFixed(1));labVert[i].setAttribute("y",(lp[1]+4).toFixed(1));
+      });
+      fisher.setAttribute("cx",C[0]);fisher.setAttribute("cy",C[1]);
+      labInt.setAttribute("x",C[0]);labInt.setAttribute("y",C[1]+4);
+      edges.forEach(function(ed,k){
+        var im=mid(Vp[ed[0]],Vp[ed[1]]), em=mid(aEnd[k],bEnd[k]);
+        incInt[k].setAttribute("x1",im[0].toFixed(1));incInt[k].setAttribute("y1",im[1].toFixed(1));
+        incInt[k].setAttribute("x2",em[0].toFixed(1));incInt[k].setAttribute("y2",em[1].toFixed(1));
+        [[aEnd[k],ed[0]],[bEnd[k],ed[1]]].forEach(function(pair,j){
+          var ep=pair[0], vp2=vpos[pair[1]];
+          incVtx[k][j].setAttribute("x1",ep[0].toFixed(1));incVtx[k][j].setAttribute("y1",ep[1].toFixed(1));
+          incVtx[k][j].setAttribute("x2",vp2[0].toFixed(1));incVtx[k][j].setAttribute("y2",vp2[1].toFixed(1));
+        });
+      });
+      gInc.setAttribute("opacity",(0.6*e).toFixed(2));
+      gCue.setAttribute("opacity",e.toFixed(2));
+      gLab.setAttribute("opacity",Math.min(1,e*2).toFixed(2));
+    }
+    slider.addEventListener("input",upd); upd();
+  }
+
+  build({prefix:"tri", shrink:0.14, OV:105, OE:55,
+    V:[[340,150],[262.06,285],[417.94,285]],
+    edges:[[0,1],[0,2],[1,2]],
+    vLab:["{1}","{2}","{3}"],
+    eLab:["{1,2}","{1,3}","{2,3}"],
+    interiorLabel:"{1,2,3}"});
+
+  build({prefix:"occ", shrink:0.13, OV:85, OE:46,
+    V:[[262,152],[420,140],[440,290],[240,300]],
+    edges:[[0,1],[1,2],[2,3],[3,0]],
+    vLab:["(a\u2080,a\u2080)","(a\u2081,a\u2080)","(a\u2081,a\u2081)","(a\u2080,a\u2081)"],
+    eLab:["s\u2081 = a\u2080","s\u2080 = a\u2081","s\u2081 = a\u2081","s\u2080 = a\u2080"],
+    interiorLabel:"full support"});
+
+  (function(){
+    function s_(a,b){return[a[0]-b[0],a[1]-b[1]];}
+    function a_(a,b){return[a[0]+b[0],a[1]+b[1]];}
+    function m_(a,s){return[a[0]*s,a[1]*s];}
+    function md_(a,b){return[(a[0]+b[0])/2,(a[1]+b[1])/2];}
+    function n_(a){var n=Math.hypot(a[0],a[1])||1;return[a[0]/n,a[1]/n];}
+    function el(tag,at,p){var e=document.createElementNS(NS,tag);for(var k in at)e.setAttribute(k,at[k]);p.appendChild(e);return e;}
+    function tx(t,sz,col,p){var e=document.createElementNS(NS,"text");e.setAttribute("text-anchor","middle");e.setAttribute("style","font-family:sans-serif;font-size:"+sz+"px;fill:"+col);e.textContent=t;p.appendChild(e);return e;}
+
+    var T=[[465.5,277.2],[290.7,134.6],[214.5,266.8],[389.3,41.4]];
+    var tedges=[[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]];
+    var clab=["s\u2080a\u2080","s\u2080a\u2081","s\u2081a\u2080","s\u2081a\u2081"];
+    var A=[[340,272],[222.1,253.6],[340,88],[457.9,253.6]];
+    var medges=[[0,1],[1,2],[2,3],[3,0]];
+    var vlab=["(a\u2080,a\u2080)","(a\u2081,a\u2080)","(a\u2081,a\u2081)","(a\u2080,a\u2081)"];
+    var Cm=[340,216.8], Tc=[340,180], OV=52, OE=34, shrink=0.13;
+    var dirV=A.map(function(p){return n_(s_(p,Cm));});
+    var Mid=medges.map(function(e){return md_(A[e[0]],A[e[1]]);});
+    var dirM=Mid.map(function(p){return n_(s_(p,Cm));});
+
+    var gT=document.getElementById("emb-tetra"), gAnc=document.getElementById("emb-anchors"),
+        gTet=document.getElementById("emb-tethers"), interior=document.getElementById("emb-interior"),
+        gCue=document.getElementById("emb-cues"), gE=document.getElementById("emb-edges"),
+        gV=document.getElementById("emb-verts"), gCL=document.getElementById("emb-clabels"),
+        gL=document.getElementById("emb-labels");
+
+    tedges.forEach(function(e){
+      var back=e[0]===1||e[1]===1;
+      el("line",{x1:T[e[0]][0],y1:T[e[0]][1],x2:T[e[1]][0],y2:T[e[1]][1],
+        stroke:"var(--faint)","stroke-opacity":back?0.28:0.5,"stroke-width":1,"stroke-dasharray":back?"4 4":""},gT);
+    });
+    T.forEach(function(p,i){
+      el("circle",{cx:p[0],cy:p[1],r:2.5,fill:"var(--faint)","fill-opacity":0.6},gT);
+      var lp=a_(p,m_(n_(s_(p,Tc)),22));
+      var t=tx(clab[i],11.5,"var(--faint)",gCL); t.setAttribute("x",lp[0].toFixed(1)); t.setAttribute("y",(lp[1]+4).toFixed(1));
+    });
+
+    var tethers=A.map(function(){return el("line",{stroke:"#BA7517","stroke-dasharray":"3 3","stroke-width":1},gTet);});
+    A.forEach(function(p){return el("circle",{cx:p[0],cy:p[1],r:3,fill:"#BA7517"},gAnc);});
+    var edgeLines=medges.map(function(){return el("line",{stroke:"#7F77DD","stroke-width":3,"stroke-linecap":"round"},gE);});
+    var vertDots=A.map(function(){return el("circle",{r:5.5,fill:"#EF9F27",stroke:"#BA7517","stroke-width":1},gV);});
+    var fisher=el("ellipse",{rx:14,ry:10,fill:"#1D9E75","fill-opacity":0.12,stroke:"#0F6E56","stroke-width":1},gCue);
+    var edgeTicks=medges.map(function(){return el("line",{stroke:"#534AB7","stroke-width":1.4,"marker-start":"url(#emb-tick)","marker-end":"url(#emb-tick)"},gCue);});
+    var labV=A.map(function(_,i){return tx(vlab[i],12,"var(--muted)",gL);});
+
+    var slider=document.getElementById("emb-e");
+    function upd(){
+      var e=parseFloat(slider.value);
+      var Vp=A.map(function(p){return a_(Cm,m_(s_(p,Cm),1-shrink*e));});
+      interior.setAttribute("points",Vp.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join(" "));
+      var vpos=A.map(function(p,i){return a_(p,m_(dirV[i],OV*e));});
+      medges.forEach(function(ed,k){
+        var off=m_(dirM[k],OE*e);
+        var P0=a_(A[ed[0]],off), P1=a_(A[ed[1]],off), mm=md_(P0,P1);
+        P0=a_(mm,m_(s_(P0,mm),1-0.07*e)); P1=a_(mm,m_(s_(P1,mm),1-0.07*e));
+        edgeLines[k].setAttribute("x1",P0[0].toFixed(1));edgeLines[k].setAttribute("y1",P0[1].toFixed(1));
+        edgeLines[k].setAttribute("x2",P1[0].toFixed(1));edgeLines[k].setAttribute("y2",P1[1].toFixed(1));
+        var u=n_(s_(P1,P0));
+        edgeTicks[k].setAttribute("x1",(mm[0]-u[0]*8).toFixed(1));edgeTicks[k].setAttribute("y1",(mm[1]-u[1]*8).toFixed(1));
+        edgeTicks[k].setAttribute("x2",(mm[0]+u[0]*8).toFixed(1));edgeTicks[k].setAttribute("y2",(mm[1]+u[1]*8).toFixed(1));
+      });
+      vpos.forEach(function(p,i){
+        vertDots[i].setAttribute("cx",p[0].toFixed(1));vertDots[i].setAttribute("cy",p[1].toFixed(1));
+        tethers[i].setAttribute("x1",A[i][0].toFixed(1));tethers[i].setAttribute("y1",A[i][1].toFixed(1));
+        tethers[i].setAttribute("x2",p[0].toFixed(1));tethers[i].setAttribute("y2",p[1].toFixed(1));
+        var lp=a_(p,m_(dirV[i],16));
+        labV[i].setAttribute("x",lp[0].toFixed(1));labV[i].setAttribute("y",(lp[1]+4).toFixed(1));
+      });
+      fisher.setAttribute("cx",Cm[0]);fisher.setAttribute("cy",Cm[1]);
+      gAnc.setAttribute("opacity",e.toFixed(2));
+      gTet.setAttribute("opacity",(0.55*e).toFixed(2));
+      gCue.setAttribute("opacity",e.toFixed(2));
+      gL.setAttribute("opacity",Math.min(1,e*2).toFixed(2));
+    }
+    slider.addEventListener("input",upd); upd();
+  })();
+})();
+</script>
+
+<div class="share-row">
+  <span class="share-label">Share</span>
+  <a class="share-btn" target="_blank"
+     href="https://twitter.com/intent/tweet?text=The+hidden+geometry+of+occupancy+measures&url={{ page.url | absolute_url | url_encode }}&via=NikMilosevic">
+    &#120143; Post
+  </a>
+  <a class="share-btn" target="_blank"
+     href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.url | absolute_url | url_encode }}">
+    in Share
+  </a>
+</div>
+
+</body>
+</html>

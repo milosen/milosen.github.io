@@ -1,0 +1,157 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage[scaled=0.90]{helvet}
+\usepackage{microtype}
+\newcommand{\headingfont}{\sffamily}
+\usepackage[a4paper,top=1.8cm,bottom=1.8cm,left=2.0cm,right=2.0cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.05}
+
+%---------- Colours ----------
+\usepackage{xcolor}
+\definecolor{accent}{HTML}{1F3A5F}
+\definecolor{subtle}{HTML}{6B7280}
+\definecolor{rulecol}{HTML}{C9CED6}
+
+\usepackage[hidelinks]{hyperref}
+\hypersetup{colorlinks=true, urlcolor=accent, linkcolor=accent}
+
+\usepackage{titlesec}
+\titleformat{\section}
+  {\headingfont\large\bfseries\color{accent}}
+  {}{0pt}{}[{\color{rulecol}\titlerule[0.8pt]}]
+\titlespacing*{\section}{0pt}{14pt}{6pt}
+
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.1em, itemsep=1pt, topsep=2pt, parsep=0pt}
+
+\usepackage{needspace}
+\usepackage{tabularx}
+
+\newcommand{\entry}[2]{%
+  \needspace{2\baselineskip}%
+  \noindent
+  \makebox[0.18\textwidth][l]{\small\color{subtle}#1}%
+  \begin{minipage}[t]{0.82\textwidth}%
+    #2%
+  \end{minipage}\par\vspace{6pt}%
+}
+
+\newcommand{\role}[2]{\textbf{#1}\hfill{\small\color{subtle}#2}\par\vspace{1pt}}
+
+\newcommand{\sub}[1]{{\small\color{subtle}#1}\par}
+
+\setlength{\parindent}{0pt}
+
+%============================================================
+\begin{document}
+
+{\headingfont\Huge\bfseries\color{accent} Nikola Milo\v{s}evi\'{c}}\\[4pt]
+{\headingfont\large\color{subtle} PhD Researcher — Reinforcement Learning}\\[8pt]
+
+{\small
+\href{mailto:milose.nik@gmail.com}{milose.nik@gmail.com}
+\;\textcolor{rulecol}{|}\;
+\href{https://milosen.github.io}{milosen.github.io}
+\;\textcolor{rulecol}{|}\;
+Leipzig, Germany
+}
+
+\section{Research Interests}
+Foundations of reinforcement learning: theory of policy optimization,
+constrained and convex Markov decision processes, and the mathematical
+foundations of learning and control. Broader interest in connecting these tools
+to models of learning in biological and artificial agents.
+
+\section{Education}
+
+\entry{2022 -- present}{%
+  \role{PhD Researcher, Reinforcement Learning}{MPI CBS Leipzig}
+  \sub{Neural Data Science Lab (advisor: Nico Scherf) at MPI for Human Cognitive and Brain Sciences. Affiliated with ScaDS.AI Leipzig.}
+  \begin{itemize}
+    \item Developing tools from information geometry and constrained optimization to
+          improve the reliability of deep reinforcement-learning algorithms.
+  \end{itemize}
+}
+
+\entry{2019 -- 2021}{%
+  \role{M.Sc., Electrical Engineering \& Information Technology}{HTWK Leipzig}
+  \sub{Final grade 1.2 (German scale).}
+  \begin{itemize}
+    \item Thesis: \emph{Segmentation of Ultra-High-Field MRI Brain Images for
+          Multi-Parameter Mapping using Deep Learning} — a variational-autoencoder
+          approach to unsupervised MRI segmentation.
+    \item Supervisors: Prof. Dr.-Ing.\ Gerold Bausch, Dr.\ Patrick Scheibe, Kornelius Podranski.
+  \end{itemize}
+}
+
+\entry{2014 -- 2018}{%
+  \role{B.Eng., Electrical Engineering \& Information Technology}{HTWK Leipzig}
+  \sub{Final grade 1.8 (German scale). Cooperative degree with Siemens (integrated vocational training).}
+}
+
+\section{Research Experience}
+
+\entry{2021 -- 2022}{%
+  \role{Doctoral Research Stay}{University of Tübingen}
+  \sub{Human and Machine Cognition Lab.}
+  \begin{itemize}
+    \item Studied reusable environment representations in human reinforcement learning.
+    \item Collaborators: Charley Wu, Philipp Schwartenbeck, Peter Dayan.
+  \end{itemize}
+}
+
+\entry{2019 -- 2021}{%
+  \role{Research Assistant}{MPI for Human Cognitive and Brain Sciences, Leipzig}
+  \begin{itemize}
+    \item Built realistic simulations of high-resolution 3D MRI acquisitions to
+          augment training data for deep-learning segmentation models.
+  \end{itemize}
+}
+
+\section{Industry Experience}
+
+\entry{2022}{%
+  \role{AI Engineer}{Appsfactory GmbH, Leipzig}
+  \begin{itemize}
+    \item Led a data-engineering project for the \emph{Frankfurter Allgemeine Zeitung}
+          and an ML project for the Saxony State Police (speaker diarization; a
+          recommender for correcting automatic transcriptions).
+  \end{itemize}
+}
+
+\entry{2018 -- 2019}{%
+  \role{Embedded Software Engineer}{SENEC, Leipzig}
+  \begin{itemize}
+    \item Controller software for smart solar-battery systems. Led two projects:
+          a hardware-in-the-loop integration test suite and a communication
+          interface to an external EV charger.
+  \end{itemize}
+}
+
+\section{Teaching}
+\entry{present}{%
+  \role{Teaching Assistant, Advanced Deep Learning}{Universität Leipzig}
+  \sub{Gave lectures for master's students; deep reinforcement learning and deep latent variable model lectures.}
+}
+
+\entry{2020 -- 2021}{%
+  \role{Teaching Assistant, Systems Theory}{HTWK Leipzig}
+  \sub{Planned and led tutorials for third-semester students; final-exam preparation.}
+}
+
+\section{Awards}
+\entry{2021}{%
+  Master's Thesis Award — \emph{Förderpreis für angewandte Digitalisierung}.
+}
+
+\section{Skills}
+\entry{Programming}{Python (scientific computing, deep learning), C/C++ (mostly embedded).}
+\entry{Methods}{Deep reinforcement learning, information geometry, constrained optimization, scientific computing, medical image analysis.}
+\entry{Languages}{English (fluent), German (fluent), Serbian (fluent).
+}
+
+\end{document}
