@@ -1,13 +1,77 @@
 @charset "utf-8";
+
+:root {
+    /* Accent shared with the standalone essays, so the site reads as one
+       identity rather than two designs. Replaces the Bootstrap default blue. */
+    --accent: #0F6E56;
+    --accent-dark: #0a5340;
+    --ink: #1c1c1a;
+    --muted: #56564f;
+}
+
 body {
     font-family: "Lato", sans-serif;
     font-weight: 400;
     padding-top: 5.0rem;
+    color: var(--ink);
 }
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: 700;
+    letter-spacing: -0.011em;
+}
+
+/* --- Accent colour -------------------------------------------------------
+   Bootstrap's default link blue reads as "unconfigured template". Routing
+   links through one accent is the single highest-impact change.
+   ---------------------------------------------------------------------- */
+a {
+    color: var(--accent);
+}
+
+a:hover, a:focus {
+    color: var(--accent-dark);
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    background-color: var(--accent);
+}
+
+.nav-pills .nav-link {
+    color: var(--muted);
+}
+
+.nav-pills .nav-link:hover {
+    color: var(--accent);
+}
+
+.badge-success {
+    background-color: var(--accent);
+}
+
+/* Year headings on the publications page: quieter than the default black
+   slab, with a hairline rule that groups the entries beneath them. */
+.pub-year {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    padding-bottom: 0.45rem;
+    margin-bottom: 0.85rem;
+    border-bottom: 2px solid var(--accent);
+}
+
+/* Card headers ("News", "Blog Posts", …). The template's default is a bold
+   run-in heading; small caps with tracking reads more considered and
+   separates chrome from content. */
+.card-heading {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
 }
 
 .text-profile-position {
@@ -65,5 +129,153 @@ div.lazy {
 
 .email-text {
     font-family: Courier, monospace;
+}
+
+/* --- Language switcher --------------------------------------------------
+   A compact segmented control: the active language reads as a solid chip,
+   the alternate as a quiet link. Kept small and monochrome so it signals
+   "utility" rather than competing with the navigation.
+   ---------------------------------------------------------------------- */
+.lang-switch {
+    display: inline-flex;
+    align-items: stretch;
+    border: 1px solid #ced4da;
+    border-radius: 0.2rem;
+    overflow: hidden;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    background-color: #fff;
+}
+
+.lang-switch-current,
+.lang-switch-link {
+    padding: 0.35em 0.55em;
+    display: inline-flex;
+    align-items: center;
+}
+
+.lang-switch-current {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.lang-switch-link {
+    color: #495057;
+    text-decoration: none;
+    transition: background-color 0.12s ease-in-out, color 0.12s ease-in-out;
+}
+
+.lang-switch-link:hover,
+.lang-switch-link:focus {
+    background-color: #e9ecef;
+    color: #212529;
+    text-decoration: none;
+}
+
+/* No counterpart exists for this page in the other language. Rendered as a
+   non-interactive control rather than hidden, so the switcher does not
+   appear and disappear between pages. */
+.lang-switch-link.disabled {
+    color: #adb5bd;
+    cursor: not-allowed;
+    background-color: #f8f9fa;
+}
+
+/* --- Standalone post chrome ---------------------------------------------
+   Injected at the top of self-contained essay pages, which do not use the
+   site layout. Deliberately minimal so it does not disturb the bespoke
+   typography of the essays themselves.
+   ---------------------------------------------------------------------- */
+.post-chrome {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0.85rem 1rem;
+    font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 0.85rem;
+}
+
+.post-chrome-back {
+    color: #495057;
+    text-decoration: none;
+}
+
+.post-chrome-back:hover {
+    color: #212529;
+    text-decoration: underline;
+}
+
+.post-chrome .lang-switch {
+    margin-left: auto;
+}
+
+/* --- Publication list ----------------------------------------------------
+   Text runs full width (no thumbnail column). The abstract collapses behind a
+   toggle so the page can be skimmed; venue and links carry the hierarchy.
+   ---------------------------------------------------------------------- */
+.pub-title {
+    font-size: 1.02rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.011em;
+    color: var(--ink);
+}
+
+.pub-venue {
+    color: var(--muted);
+}
+
+/* Links rendered as small caps-ish pills instead of [bracketed] text, which
+   is a dated convention and adds visual noise at this density. */
+.pub-links a {
+    display: inline-block;
+    margin-right: 0.4rem;
+    padding: 0.1rem 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.12s ease-in-out, border-color 0.12s ease-in-out;
+}
+
+.pub-links a:hover,
+.pub-links a:focus {
+    color: var(--accent);
+    border-color: var(--accent);
+    text-decoration: none;
+}
+
+/* Chevron indicating the abstract's collapsed state. */
+.pub-toggle::after {
+    content: " \25be";
+    display: inline-block;
+    transition: transform 0.15s ease-in-out;
+}
+
+.pub-toggle:not(.collapsed) {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.pub-toggle:not(.collapsed)::after {
+    transform: rotate(180deg);
+}
+
+.pub-abstract {
+    max-width: 62rem;
+    line-height: 1.6;
+}
+
+/* Publication cards sit flush; soften the container edge rather than boxing
+   each entry, so the list reads as one record. */
+.publication-list {
+    border: 1px solid rgba(0, 0, 0, 0.07);
 }
 

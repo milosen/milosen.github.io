@@ -2,8 +2,15 @@ homepage:
   show_experience: true
   show_news: true
   show_selected_publications: true
-  show_posts: true
+  # Blog posts are hidden while the essays are still being revised. The post
+  # files remain in _posts/ and their individual pages are still published;
+  # set this back to true to show the list on the homepage again.
+  show_posts: false
   num_news: 10
+
+# Show the page links (Home / Publications / More) in the top bar. The bar
+# itself, with the name and the language switcher, is always shown.
+show_nav_links: false
 
 # Feel free to replace the footer text if you would like to, but I will greatly appreciate it 
 # if you keep the link to the template so that more people can benefit from it. Thanks!
