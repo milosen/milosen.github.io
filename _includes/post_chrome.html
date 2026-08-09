@@ -1,0 +1,72 @@
+{%- comment -%}
+Language + navigation bar for standalone essay posts.
+
+These posts use `layout: null` and are complete HTML documents with their own
+styling, so this include ships its own scoped styles rather than relying on
+the site stylesheet. Drop it immediately after <body> in such a post.
+
+Front matter the post should set:
+  lang            — "en" or "de" (defaults to site.default_lang)
+  translation_key — shared identifier linking the two language versions
+{%- endcomment -%}
+{%- assign lang = page.lang | default: site.default_lang -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- if lang == 'de' -%}
+  {%- assign other = 'en' -%}
+  {%- assign home_url = '/de/' -%}
+{%- else -%}
+  {%- assign other = 'de' -%}
+  {%- assign home_url = '/' -%}
+{%- endif -%}
+
+{%- assign target = page.translation_url -%}
+{%- if target == nil and page.translation_key -%}
+  {%- for post in site.posts -%}
+    {%- assign post_lang = post.lang | default: site.default_lang -%}
+    {%- if post.translation_key == page.translation_key and post_lang == other -%}
+      {%- assign target = post.url -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- assign other_name = site.data.i18n[other].lang_name -%}
+
+<style>
+.post-chrome{display:flex;align-items:center;gap:1rem;max-width:46rem;margin:0 auto;
+  padding:.85rem 1.25rem;font-family:"Lato",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:.85rem;box-sizing:border-box}
+.post-chrome a.post-chrome-back{color:#495057;text-decoration:none}
+.post-chrome a.post-chrome-back:hover{color:#212529;text-decoration:underline}
+.post-chrome .lang-switch{margin-left:auto;display:inline-flex;align-items:stretch;
+  border:1px solid #ced4da;border-radius:.2rem;overflow:hidden;font-size:.75rem;
+  font-weight:700;letter-spacing:.03em;line-height:1;background:#fff;flex:none}
+.post-chrome .lang-switch-current,.post-chrome .lang-switch-link{padding:.35em .55em;
+  display:inline-flex;align-items:center}
+.post-chrome .lang-switch-current{background:#6c757d;color:#fff}
+.post-chrome a.lang-switch-link{color:#495057;text-decoration:none}
+.post-chrome a.lang-switch-link:hover{background:#e9ecef;color:#212529;text-decoration:none}
+.post-chrome .lang-switch-link.disabled{color:#adb5bd;background:#f8f9fa;cursor:not-allowed}
+@media (prefers-color-scheme:dark){
+  .post-chrome a.post-chrome-back{color:#adb5bd}
+  .post-chrome a.post-chrome-back:hover{color:#f8f9fa}
+  .post-chrome .lang-switch{border-color:#495057;background:transparent}
+  .post-chrome .lang-switch-current{background:#495057;color:#fff}
+  .post-chrome a.lang-switch-link{color:#adb5bd}
+  .post-chrome a.lang-switch-link:hover{background:#343a40;color:#fff}
+  .post-chrome .lang-switch-link.disabled{color:#6c757d;background:transparent}
+}
+</style>
+
+<div class="post-chrome">
+  <a class="post-chrome-back" href="{{ home_url | relative_url }}">&larr; {{ t.back_to_home }}</a>
+  <div class="lang-switch" role="group" aria-label="{{ t.lang_current_label }}">
+    <span class="lang-switch-current" aria-current="true">{{ t.lang_name | slice: 0, 2 | upcase }}</span>
+    {%- if target %}
+    <a class="lang-switch-link" href="{{ target | relative_url }}" hreflang="{{ other }}" lang="{{ other }}"
+       title="{{ t.lang_switch_label }}" aria-label="{{ t.lang_switch_label }}">{{ other_name | slice: 0, 2 | upcase }}</a>
+    {%- else %}
+    <span class="lang-switch-link disabled" title="{{ t.lang_unavailable }}" aria-disabled="true">{{ other_name | slice: 0, 2 | upcase }}</span>
+    {%- endif %}
+  </div>
+</div>

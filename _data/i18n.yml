@@ -1,0 +1,79 @@
+# Interface translations.
+# Access pattern in templates:
+#   {% assign lang = page.lang | default: site.default_lang %}
+#   {% assign t = site.data.i18n[lang] %}
+#   {{ t.blog_posts }}
+#
+# To add a string: add the same key under BOTH `en` and `de`.
+
+en:
+  # Navigation
+  nav_home: Home
+  nav_publications: Publications
+  nav_more: More
+  nav_menu: Menu
+
+  # Language switcher
+  lang_name: English
+  lang_switch_to: Deutsch
+  lang_switch_label: Switch to German
+  lang_current_label: "Language: English"
+  lang_unavailable: Not available in German
+
+  # Homepage section headings
+  blog_posts: Blog Posts
+  news: News
+  selected_publications: Selected Publications
+  education: Education
+  experience: Experience
+  awards: Honors & Awards
+
+  # Profile card links
+  cv: Curriculum Vitae
+  google_scholar: Google Scholar
+
+  # Publications page
+  publications_heading: Publications
+  abstract: Abstract
+  all_publications: All publications
+
+  # Post chrome
+  back_to_home: Back to homepage
+  published_on: Published
+  also_available_in: Also available in
+
+de:
+  # Navigation
+  nav_home: Start
+  nav_publications: Publikationen
+  nav_more: Mehr
+  nav_menu: Menü
+
+  # Language switcher
+  lang_name: Deutsch
+  lang_switch_to: English
+  lang_switch_label: Zu Englisch wechseln
+  lang_current_label: "Sprache: Deutsch"
+  lang_unavailable: Auf Englisch nicht verfügbar
+
+  # Homepage section headings
+  blog_posts: Blogbeiträge
+  news: Aktuelles
+  selected_publications: Ausgewählte Publikationen
+  education: Ausbildung
+  experience: Berufserfahrung
+  awards: Auszeichnungen
+
+  # Profile card links
+  cv: Lebenslauf
+  google_scholar: Google Scholar
+
+  # Publications page
+  publications_heading: Publikationen
+  abstract: Zusammenfassung
+  all_publications: Alle Publikationen
+
+  # Post chrome
+  back_to_home: Zurück zur Startseite
+  published_on: Veröffentlicht
+  also_available_in: Auch verfügbar auf

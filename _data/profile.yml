@@ -2,12 +2,7 @@ primary_name: "Nikola Milosevic"
 secondary_name: ""
 navbar_name: "Nikola Milosevic"
 
-positions:
-- logo: /assets/images/badges/mpi-logo.jpg  # Logo is optional
-  name: Ph.D. Candidate @ <a href="https://www.cbs.mpg.de/en" target="_blank">MPI CBS</a>
-#- name: Position 2 without logo
-
-
+# Language-independent contact / identity information.
 email: "milose.nik@gmail.com"
 cv_link: /assets/cv.pdf
 gscholar: vGYpn-sAAAAJ&hl
@@ -16,35 +11,78 @@ twitter: NikMilosevic
 linkedin: nikola-milosevic-5061271a7
 orcid: 0000-0003-1904-8867
 
-short_bio_text_justify: false
-short_bio: >-
-  <p>
-    I’m a Ph.D. researcher at MPI CBS working on <a href="https://en.wikipedia.org/wiki/reinforcement_learning" target="_blank">Reinforcement Learning</a> that is safe, well understood, and ready for the real world.
-  </p>
-  <p>
-    Most RL breakthroughs live in simulators. Getting them to work under real-world constraints (safety requirements, limited data, deployment risk) is not just an engineering challenge, but the place where the hard and interesting theoretical problems are. I work on building a strong theoretical foundation for reinforcement learning for precisely these issues.
-  </p>
-
 portrait_url: /assets/images/portrait.jpg
+short_bio_text_justify: false
+
+# --- Language-dependent content -------------------------------------------
+# Everything below is keyed by language code. Templates read it as
+#   site.data.profile.positions[lang]
+# so adding a language means adding a key here, not touching the templates.
+
+positions:
+  en:
+  - logo: /assets/images/badges/mpi-logo.jpg  # Logo is optional
+    name: Ph.D. Candidate @ <a href="https://www.cbs.mpg.de/en" target="_blank">MPI CBS</a>
+  de:
+  - logo: /assets/images/badges/mpi-logo.jpg
+    name: Doktorand @ <a href="https://www.cbs.mpg.de/de" target="_blank">MPI CBS</a>
+
+short_bio:
+  en: >-
+    <p>
+      I’m a Ph.D. researcher at MPI CBS working on <a href="https://en.wikipedia.org/wiki/reinforcement_learning" target="_blank">Reinforcement Learning</a> that is safe, well understood, and ready for the real world.
+    </p>
+    <p>
+      Most RL breakthroughs live in simulators. Getting them to work under real-world constraints (safety requirements, limited data, deployment risk) is not just an engineering challenge, but the place where the hard and interesting theoretical problems are. I work on building a strong theoretical foundation for reinforcement learning for precisely these issues.
+    </p>
+  de: >-
+    <p>
+      Ich bin Doktorand am MPI CBS und forsche an <a href="https://de.wikipedia.org/wiki/Best%C3%A4rkendes_Lernen" target="_blank">Reinforcement Learning</a>, das sicher, theoretisch gut verstanden und praxistauglich ist.
+    </p>
+    <p>
+      Die meisten Fortschritte im Reinforcement Learning entstehen in Simulationen. Sie unter realen Bedingungen zum Laufen zu bringen — mit Sicherheitsanforderungen, begrenzten Daten und Einsatzrisiken — ist nicht bloß eine ingenieurtechnische Aufgabe, sondern genau dort liegen die schwierigen und interessanten theoretischen Fragen. Ich arbeite daran, für ebendiese Fragen ein tragfähiges theoretisches Fundament zu schaffen.
+    </p>
 
 education:
-- name: Max Planck Institute for Human Cognitive and Brain Sciences
-  logo: /assets/images/badges/mpi-logo.jpg
-  position: >- 
-    Neural Data Science Lab <br/>
-    Ph.D. Candidate
-  date: Sep. 2022 - present
-- name: University of Applied Sciences Leipzig
-  logo: /assets/images/badges/htwk-logo.jpg
-  position: M.S. in Electrical Engineering
-  date: Sep. 2019 - Jul. 2021
+  en:
+  - name: Max Planck Institute for Human Cognitive and Brain Sciences
+    logo: /assets/images/badges/mpi-logo.jpg
+    position: >-
+      Neural Data Science Lab <br/>
+      Ph.D. Candidate
+    date: Sep. 2022 - present
+  - name: University of Applied Sciences Leipzig
+    logo: /assets/images/badges/htwk-logo.jpg
+    position: M.S. in Electrical Engineering
+    date: Sep. 2019 - Jul. 2021
+  de:
+  - name: Max-Planck-Institut für Kognitions- und Neurowissenschaften
+    logo: /assets/images/badges/mpi-logo.jpg
+    position: >-
+      Neural Data Science Lab <br/>
+      Doktorand
+    date: Sep. 2022 - heute
+  - name: Hochschule für Technik, Wirtschaft und Kultur Leipzig
+    logo: /assets/images/badges/htwk-logo.jpg
+    position: M.Sc. Elektrotechnik
+    date: Sep. 2019 - Jul. 2021
 
 # experience:
-# - name: Peking University
-#   logo: /assets/images/badges/PKU_red.png
-#   position: Research Intern
-#   date: Sep. 2019 - Jul. 2021
+#   en:
+#   - name: Peking University
+#     logo: /assets/images/badges/PKU_red.png
+#     position: Research Intern
+#     date: Sep. 2019 - Jul. 2021
+#   de:
+#   - name: Universität Peking
+#     logo: /assets/images/badges/PKU_red.png
+#     position: Forschungspraktikant
+#     date: Sep. 2019 - Jul. 2021
 
 awards:
-- name: Master's Thesis Award @ University of Applied Sciences Leipzig
-  date: 2021
+  en:
+  - name: Master's Thesis Award @ University of Applied Sciences Leipzig
+    date: 2021
+  de:
+  - name: Masterarbeitspreis der HTWK Leipzig
+    date: 2021

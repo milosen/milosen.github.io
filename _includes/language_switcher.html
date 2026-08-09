@@ -1,0 +1,77 @@
+{%- comment -%}
+Language switcher.
+
+Renders a link to the counterpart of the current page in the other language.
+The counterpart URL is resolved in this order:
+
+  1. `page.translation_url` — an explicit override in front matter. Always wins.
+  2. `page.translation_key` — matches against posts carrying the same key in
+     the target language. This is how blog posts pair up.
+  3. The mirrored path convention: `/foo` <-> `/de/foo`, for the static pages.
+
+If nothing resolves, the control renders disabled with a tooltip explaining
+that the page has no version in the other language, rather than linking
+somewhere that does not exist.
+
+Params:
+  extra_class — appended to the wrapper's class list (optional)
+{%- endcomment -%}
+
+{%- assign lang = page.lang | default: site.default_lang -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- if lang == 'de' -%}
+  {%- assign other = 'en' -%}
+{%- else -%}
+  {%- assign other = 'de' -%}
+{%- endif -%}
+
+{%- comment -%} 1. Explicit override. {%- endcomment -%}
+{%- assign target = page.translation_url -%}
+
+{%- comment -%} 2. Pair posts by translation_key. {%- endcomment -%}
+{%- if target == nil and page.translation_key -%}
+  {%- for post in site.posts -%}
+    {%- assign post_lang = post.lang | default: site.default_lang -%}
+    {%- if post.translation_key == page.translation_key and post_lang == other -%}
+      {%- assign target = post.url -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- comment -%}
+3. Mirrored-path convention for the static pages. Only applied when the page
+opts in with `translated: true`, so we never invent a URL for a page that has
+no counterpart.
+{%- endcomment -%}
+{%- if target == nil and page.translated -%}
+  {%- if lang == 'de' -%}
+    {%- assign stripped = page.url | remove_first: '/de' -%}
+    {%- if stripped == '' -%}{%- assign stripped = '/' -%}{%- endif -%}
+    {%- assign target = stripped -%}
+  {%- else -%}
+    {%- if page.url == '/' -%}
+      {%- assign target = '/de/' -%}
+    {%- else -%}
+      {%- assign target = '/de' | append: page.url -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- assign other_name = site.data.i18n[other].lang_name -%}
+
+<div class="lang-switch {{ include.extra_class }}" role="group" aria-label="{{ t.lang_current_label }}">
+  <span class="lang-switch-current" aria-current="true">{{ t.lang_name | slice: 0, 2 | upcase }}</span>
+  {%- if target %}
+  <a class="lang-switch-link"
+     href="{{ target | relative_url }}"
+     hreflang="{{ other }}"
+     lang="{{ other }}"
+     title="{{ t.lang_switch_label }}"
+     aria-label="{{ t.lang_switch_label }}">{{ other_name | slice: 0, 2 | upcase }}</a>
+  {%- else %}
+  <span class="lang-switch-link disabled"
+        title="{{ t.lang_unavailable }}"
+        aria-disabled="true">{{ other_name | slice: 0, 2 | upcase }}</span>
+  {%- endif %}
+</div>

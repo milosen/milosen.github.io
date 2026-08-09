@@ -1,14 +1,18 @@
 {% assign publications = include.publications %}
+{%- assign lang = page.lang | default: site.default_lang -%}
+{%- assign t = site.data.i18n[lang] -%}
 <div class="my-3 p-0 bg-white shadow-sm rounded-sm">
-    <h6 class="border-bottom border-gray p-3 mb-0">
-        {% if include.title %}{{ include.title }}{% else %}<i class="fas fa-star"></i> Selected Recent Publications{% endif %} 
-        <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank">(view all <i class="fas fa-angle-double-right"></i>)</a>
+    <h6 class="border-bottom border-gray p-3 mb-0 card-heading">
+        {% if include.title %}{{ include.title }}{% else %}<i class="fas fa-star"></i> {{ t.selected_publications }}{% endif %}
     </h6>
+    {%- comment -%}
+    show_year: this card is not grouped by year, so each entry has to carry
+    its own date.
+    {%- endcomment -%}
     {% for item in publications limit:include.limit %}
-        {% include widgets/publication_item.html item=item first=false last=false %}
+        {% include widgets/publication_item.html item=item first=false last=false show_year=true %}
     {% endfor %}
-    <h6 class="d-block p-3 mt-0 text-right">
-        <a href="https://scholar.google.com/citations?user={{ site.data.profile.gscholar }}" target="_blank">All publications <i class="fas fa-angle-double-right"></i></a>
+    <h6 class="d-block p-3 mt-0 text-right font-weight-normal">
+        <a href="{% if lang == 'de' %}{{ '/de/publications' | relative_url }}{% else %}{{ '/publications' | relative_url }}{% endif %}">{{ t.all_publications }} <i class="fas fa-angle-double-right"></i></a>
     </h6>
 </div>
-

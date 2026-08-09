@@ -1,10 +1,47 @@
+{%- comment -%}
+Blog post list, filtered to the current language.
+
+A post appears here when its `lang` matches the page's language. Posts written
+only in the other language are simply absent — the language switcher on a post
+handles the cross-links.
+{%- endcomment -%}
+{%- assign lang = page.lang | default: site.default_lang -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- assign posts_in_lang = '' | split: '' -%}
+{%- for post in site.posts -%}
+  {%- assign post_lang = post.lang | default: site.default_lang -%}
+  {%- if post_lang == lang -%}
+    {%- assign posts_in_lang = posts_in_lang | push: post -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- assign count = posts_in_lang | size -%}
+{%- if count > 0 %}
 <div class="my-3 bg-white shadow-sm rounded-sm">
-    <h6 class="p-3 mb-0 border-bottom border-gray"><i class="fas fa-pen"></i> Blog Posts</h6>
+    <h6 class="p-3 mb-0 border-bottom border-gray card-heading">{{ t.blog_posts }}</h6>
     <div class="px-3 pb-1">
-        {% for post in site.posts %}
+        {% for post in posts_in_lang %}
         <div class="media py-2 {% unless forloop.first %}border-top border-gray{% endunless %}">
             <div class="media-body">
                 <a href="{{ post.url | relative_url }}" class="font-weight-bold">{{ post.title }}</a>
+                {%- comment -%}
+                Mark posts that also exist in the other language, so readers know
+                a translation is one click away.
+                {%- endcomment -%}
+                {%- if post.translation_key -%}
+                  {%- if lang == 'de' %}{% assign other = 'en' %}{% else %}{% assign other = 'de' %}{% endif -%}
+                  {%- assign has_translation = false -%}
+                  {%- for candidate in site.posts -%}
+                    {%- assign candidate_lang = candidate.lang | default: site.default_lang -%}
+                    {%- if candidate.translation_key == post.translation_key and candidate_lang == other -%}
+                      {%- assign has_translation = true -%}
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if has_translation %}
+                  <span class="badge badge-light border text-muted font-weight-normal ml-1 align-middle">{{ other | upcase }}</span>
+                  {%- endif -%}
+                {%- endif %}
                 {% if post.description %}
                 <div class="text-muted small">{{ post.description }}</div>
                 {% endif %}
@@ -14,3 +51,4 @@
         {% endfor %}
     </div>
 </div>
+{%- endif %}

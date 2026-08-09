@@ -1,9 +1,10 @@
 ---
 layout: default
-title : Homepage
+title : Startseite
 navbar_key: home
-lang: en
+lang: de
 translated: true
+permalink: /de/
 ---
 {%- assign t = site.data.i18n[page.lang] -%}
 {%- assign selected_pubs_title = t.selected_publications -%}
@@ -22,16 +23,13 @@ translated: true
 {% endif %}
 
 {% if site.data.display.homepage.show_posts %}
-    {% assign count_posts = site.posts | size %}
-    {% if count_posts > 0 %}
-        {% include widgets/posts_card.html %}
-    {% endif %}
+    {% include widgets/posts_card.html %}
 {% endif %}
 
 {% if site.data.display.homepage.show_selected_publications %}
     {% assign pubs = site.publications | sort: "date" | reverse | where: "selected", true %}
-    {% 
-        include widgets/publication_card.html 
+    {%
+        include widgets/publication_card.html
         publications=pubs
         title=selected_pubs_title
     %}

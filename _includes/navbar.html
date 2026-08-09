@@ -1,18 +1,44 @@
+{%- assign lang = page.lang | default: site.default_lang -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- assign nav_pages = site.data.navigation.pages[lang] -%}
+{%- comment -%}
+The page links are toggled by `show_nav_links` in _data/display.yml. When they
+are off, the bar keeps the name and the language switcher, and the mobile menu
+button is dropped entirely (there would be nothing behind it).
+{%- endcomment -%}
+{%- assign show_links = site.data.display.show_nav_links -%}
 <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top mb-5 shadow-sm">
     <div class="{% if page.container_class %}{{ page.container_class }}{% else %}container-lg{% endif %}">
-        <a class="navbar-brand"><strong>{{site.data.profile.navbar_name}}</strong></a>
-        <button class="navbar-toggler" style="font-size: 1em; padding: 0.5em;" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-map"></i> Menu
+        <a class="navbar-brand" href="{% if lang == 'de' %}{{ '/de/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}"><strong>{{site.data.profile.navbar_name}}</strong></a>
+
+        {%- if show_links %}
+        <!-- Visible on small screens, next to the menu toggle, so the language
+             control is never hidden behind the collapsed menu. -->
+        <div class="d-sm-none ml-auto mr-2">
+            {% include language_switcher.html %}
+        </div>
+
+        <button class="navbar-toggler" style="font-size: 1em; padding: 0.5em;" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="{{ t.nav_menu }}">
+            <i class="fas fa-map"></i> {{ t.nav_menu }}
         </button>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                {% for item in site.data.navigation.pages %}
-                <li class="nav-item {% if item.name == page.navbar_title %}active{% endif %}">
-                    <a class="nav-link" href="{{ item.url | relative_url }}">{{ item.name }}</a>
+            <ul class="navbar-nav ml-auto align-items-sm-center">
+                {% for item in nav_pages %}
+                {%- assign label_key = 'nav_' | append: item.key -%}
+                <li class="nav-item {% if item.key == page.navbar_key %}active{% endif %}">
+                    <a class="nav-link" href="{{ item.url | relative_url }}">{{ t[label_key] }}</a>
                 </li>
                 {% endfor %}
+                <li class="nav-item d-none d-sm-flex align-items-center pl-sm-3">
+                    {% include language_switcher.html %}
+                </li>
             </ul>
         </div>
+        {%- else %}
+        <div class="ml-auto">
+            {% include language_switcher.html %}
+        </div>
+        {%- endif %}
     </div>
 </nav>

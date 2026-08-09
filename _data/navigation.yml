@@ -1,9 +1,20 @@
+# Site navigation, per language.
+#
+# `key` links the entry to its translated label in _data/i18n.yml (nav_<key>)
+# and marks the active page: set `navbar_key` in a page's front matter to the
+# same value.
 pages:
-# NOTE: `name` field must match the `navbar_title` field in the page's front matter to ensure the correct page is highlighted in the navbar.
-#       For example, the `navbar_title` field in `More.html` is "More" and the `name` field here should also be "More"
-#- name: Home
-#  url: /
-#- name: Publications
-#  url: /publications
-#- name: More
-#  url: /more
+  en:
+  - key: home
+    url: /
+  - key: publications
+    url: /publications
+  - key: more
+    url: /more
+  de:
+  - key: home
+    url: /de/
+  - key: publications
+    url: /de/publications
+  - key: more
+    url: /de/more

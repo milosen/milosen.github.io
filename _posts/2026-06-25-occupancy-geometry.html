@@ -3,9 +3,14 @@ layout: null
 title: "The geometry of occupancy measures"
 date: 2026-06-25
 description: "An interactive essay on the information geometry of state–action occupancy measures in reinforcement learning: the cometric as the primitive object, the marginal–conditional warp as a law of total variance, and how the dynamics couple policy to visitation."
+lang: en
+# Shared with this post's German counterpart, once it exists. Create
+# _posts/<date>-occupancy-geometry-de.html with `lang: de` and the same
+# translation_key, and the language button links the two automatically.
+translation_key: occupancy-geometry
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ page.lang | default: site.default_lang }}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -120,8 +125,8 @@ description: "An interactive essay on the information geometry of state–action
 </style>
 </head>
 <body>
+{% include post_chrome.html %}
 <div class="wrap">
-  <a href="{{ '/' | relative_url }}" class="home-btn">&#8592; Home</a>
 
   <span class="tag">Interactive essay</span>
   <h1>The geometry of occupancy measures</h1>

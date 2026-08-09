@@ -1,3 +1,5 @@
+{%- assign lang = page.lang | default: site.default_lang -%}
+{%- assign t = site.data.i18n[lang] -%}
 <div class="row">
     <div class="col">
         <div class="card border-0 shadow-sm bg-white">
@@ -30,7 +32,7 @@
                             {% endif %}
                         </div>
                         <div class="text-profile-position">
-                            {% for position in site.data.profile.positions %}
+                            {% for position in site.data.profile.positions[lang] %}
                             {% if position.logo -%}
                             <img src="{{ position.logo | relative_url }}" alt="Logo" class="inline-badge"/>
                             {%- endif %}
@@ -38,10 +40,10 @@
                             {% endfor %}
                         </div>
                         <div class="text-profile-bio mt-3" {% if site.data.profile.short_bio_text_justify %}style="text-align: justify;"{% endif %}>
-                            {{ site.data.profile.short_bio }}
+                            {{ site.data.profile.short_bio[lang] }}
                         </div>
                         {% if site.data.profile.cv_link %}
-                            <a target="_blank" href="{{ site.data.profile.cv_link | relative_url }}"><i class="fas fa-file-alt"></i> Curriculum Vitae</a> <br/>
+                            <a target="_blank" href="{{ site.data.profile.cv_link | relative_url }}"><i class="fas fa-file-alt"></i> {{ t.cv }}</a> <br/>
                         {% endif %}
                     </div>
         
@@ -60,7 +62,7 @@
                         {%- assign gscholar_url = 'https://scholar.google.com/citations?user=' | append: site.data.profile.gscholar -%}
                         {%- endif -%}
                         <a class="pr-3 no-break" target="_blank" href="{{ gscholar_url }}">
-                            <i class="fab fa-google-scholar"></i> Google Scholar
+                            <i class="fab fa-google-scholar"></i> {{ t.google_scholar }}
                         </a>
                         {% endif %}
                         

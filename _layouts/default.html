@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+{%- assign lang = page.lang | default: site.default_lang -%}
+<html lang="{{ lang }}">
 <!-- Template: https://github.com/luost26/academic-homepage -->
 <head>
     <meta charset="utf-8">
@@ -17,6 +18,28 @@
     <link rel="stylesheet" href="{{ '/assets/css/global.css' | relative_url }}">
     <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
     <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
+    {%- comment -%}
+    Tell search engines these pages are translations of one another, so the
+    German version is served to German searchers instead of competing with the
+    English one.
+    {%- endcomment -%}
+    {%- if page.translated %}
+    {%- if lang == 'de' -%}
+      {%- assign en_url = page.url | remove_first: '/de' -%}
+      {%- if en_url == '' -%}{%- assign en_url = '/' -%}{%- endif -%}
+      {%- assign de_url = page.url -%}
+    {%- else -%}
+      {%- assign en_url = page.url -%}
+      {%- if page.url == '/' -%}
+        {%- assign de_url = '/de/' -%}
+      {%- else -%}
+        {%- assign de_url = '/de' | append: page.url -%}
+      {%- endif -%}
+    {%- endif %}
+    <link rel="alternate" hreflang="en" href="{{ en_url | absolute_url }}">
+    <link rel="alternate" hreflang="de" href="{{ de_url | absolute_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ en_url | absolute_url }}">
+    {%- endif %}
 </head>
 <body class="bg-light" {{ page.body_attr }}>
     {% include navbar.html %}
