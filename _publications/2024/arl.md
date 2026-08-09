@@ -22,8 +22,9 @@ authors:
   - Jan Huisken
   - Nico Scherf
 links:
-  #Code: https://github.com/milosen/c3po
   Preprint: https://arxiv.org/abs/2406.03845
-  #OpenReview: https://openreview.net/forum?id=2cvUHCgZbF
-  #Unsplash: https://unsplash.com/photos/sliced-in-half-pineapple--_PLJZmHZzk
+  # TODO: this paper is on OpenReview under the ICML 2024 ARLET workshop, but the
+  # forum id still needs to be filled in. The id previously commented out here
+  # (2cvUHCgZbF) belongs to the C3PO paper, not this one.
+  # OpenReview: https://openreview.net/forum?id=
 ---

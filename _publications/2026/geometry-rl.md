@@ -1,10 +1,11 @@
 ---
 title:          "The Geometry of Nonlinear Reinforcement Learning"
-date:           2025-09-01 00:00:00 +0000
+# Workshop was held 10-14 Nov 2025; PMLR dates the proceedings 2026.
+date:           2026-01-01 00:00:00 +0000
 selected:       true
-pub_pre:        "Preprint — "
-pub:            "arXiv:2509.01432"
-pub_date:       "2025"
+pub:            "Geometry, Topology, and Machine Learning Workshop (GTML 2025)"
+pub_post:       ", PMLR 325:215-239"
+pub_date:       "2026"
 
 abstract: >-
   We present a unified geometric framework in which reward maximization, safe exploration,
@@ -18,5 +19,6 @@ authors:
   - Nikola Milosevic
   - Nico Scherf
 links:
+  Proceedings: https://proceedings.mlr.press/v325/milosevic26a.html
   Preprint: https://arxiv.org/abs/2509.01432
 ---

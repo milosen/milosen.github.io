@@ -3,8 +3,7 @@ title:          "Embedding Safety into RL: A New Take on Trust Region Methods"
 date:           2025-05-29 00:01:00 +0800
 selected:       true
 pub:            "International Conference on Machine Learning (ICML)"
-# pub_pre:        "Submitted to "
-# pub_post:       'Under review.'
+pub_post:       ", PMLR 267:44199-44224"
 # pub_last:       ' <span class="badge badge-pill badge-publication badge-success">Spotlight</span>'
 pub_date:       "2025"
 
@@ -25,8 +24,8 @@ authors:
   - Johannes Müller
   - Nico Scherf
 links:
-  Code: https://github.com/milosen/ctrpo
+  Proceedings: https://proceedings.mlr.press/v267/milosevic25a.html
   Preprint: https://arxiv.org/abs/2411.02957
+  Code: https://github.com/milosen/ctrpo
   OpenReview: https://openreview.net/forum?id=4zRb89SbzG
-  #Unsplash: https://unsplash.com/photos/sliced-in-half-pineapple--_PLJZmHZzk
 ---

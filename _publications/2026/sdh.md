@@ -1,7 +1,7 @@
 ---
 title:          "Stochastic Decision Horizons for Constrained Reinforcement Learning"
 date:           2026-02-04 00:00:00 +0000
-selected:       true
+selected:       false
 pub_pre:        "Preprint — "
 pub:            "arXiv:2602.04599"
 pub_date:       "2026"

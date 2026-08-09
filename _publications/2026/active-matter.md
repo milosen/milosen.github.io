@@ -1,7 +1,7 @@
 ---
 title:          "Physical embodiment enables information processing beyond explicit flow sensing in active matter"
 date:           2026-03-01 00:00:00 +0000
-selected:       false
+selected:       true
 pub:            "Science Advances"
 pub_post:       ", 12(11), eaec0783"
 pub_date:       "2026"
@@ -14,7 +14,7 @@ abstract: >-
   simplify the control problem.
 
 authors:
-  - Dominik Paul
+  - Diptabrata Paul
   - Nikola Milosevic
   - Nico Scherf
   - Frank Cichos

@@ -16,8 +16,7 @@ authors:
   - Johannes Müller
   - Nico Scherf
 links:
-  Code: https://github.com/milosen/c3po
   Preprint: https://arxiv.org/abs/2506.00700
+  Code: https://github.com/milosen/c3po
   OpenReview: https://openreview.net/forum?id=2cvUHCgZbF
-  #Unsplash: https://unsplash.com/photos/sliced-in-half-pineapple--_PLJZmHZzk
 ---
