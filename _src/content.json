@@ -1,0 +1,194 @@
+{
+ "pubs": [
+  {
+   "title": "Active Inference as a Convex Markov Decision Process",
+   "date": "2026-07-17 00:00:00 +0000",
+   "selected": true,
+   "pub_pre": "",
+   "pub": "International Workshop on Active Inference (IWAI 2026)",
+   "pub_post": "",
+   "pub_date": "2026",
+   "abstract": "Active Inference (AIF) frames adaptive behavior as the minimization of expected free energy (EFE), combining epistemic and pragmatic objectives within a single variational principle. We frame AIF as policy optimization and show that, for closed-loop control policies, EFE minimization can be formulated as a convex Markov decision process (MDP). In this formulation, the pragmatic terms are linear in the predictive state marginals and therefore equivalent to reward maximization in a latent MDP, while the epistemic value introduces a nonlinear component that distinguishes EFE minimization from standard reinforcement learning. This perspective further reveals the epistemic drive of active inference as a policy-dependent (performative) reward. We analyze finite-horizon, discounted, and average-reward formulations of EFE and derive a mirror descent (MD) algorithm that locally linearizes the objective around the current state marginals, yielding a policy-dependent reward that is compatible with actor-critic methods and dynamic programming. Finally, we argue that coupling world-model learning with policy optimization gives active inference the structure of performative reinforcement learning, providing a route toward grounding active inference within modern reinforcement learning and optimization theory, including convergence analysis and principled policy improvement guarantees.",
+   "authors": [
+    "Nikola Milosevic",
+    "Nicolás Hinrichs",
+    "Nico Scherf"
+   ],
+   "links": {
+    "Preprint": "https://arxiv.org/abs/2607.20152"
+   },
+   "src": "_publications/2026/iwai-active-inference.md"
+  },
+  {
+   "title": "Physical embodiment enables information processing beyond explicit flow sensing in active matter",
+   "date": "2026-03-01 00:00:00 +0000",
+   "selected": true,
+   "pub_pre": "",
+   "pub": "Science Advances",
+   "pub_post": ", 12(11), eaec0783",
+   "pub_date": "2026",
+   "abstract": "We show that physical embodiment in active matter systems enables information processing capabilities that exceed what is possible through explicit flow sensing alone. Using microswimmers as a model system, we demonstrate that the body itself acts as a computational resource, coupling sensory and motor degrees of freedom in ways that simplify the control problem.",
+   "authors": [
+    "Diptabrata Paul",
+    "Nikola Milosevic",
+    "Nico Scherf",
+    "Frank Cichos"
+   ],
+   "links": {
+    "DOI": "https://doi.org/10.1126/sciadv.aec0783"
+   },
+   "src": "_publications/2026/active-matter.md"
+  },
+  {
+   "title": "Stochastic Decision Horizons for Constrained Reinforcement Learning",
+   "date": "2026-02-04 00:00:00 +0000",
+   "selected": false,
+   "pub_pre": "Preprint — ",
+   "pub": "arXiv:2602.04599",
+   "pub_post": "",
+   "pub_date": "2026",
+   "abstract": "We introduce a framework for constrained RL where constraint satisfaction is enforced at every step. A state-action continuation probability models constraint violations as effective horizon reductions. Building on Control as Inference, we develop two off-policy algorithms: max-entropy AS-SAC, which treats violations as absorbing states, and KL-regularized VT-MPO, which halts reward accumulation on violation. VT-MPO achieves competitive performance with 4× fewer environment steps on humanoid locomotion and identifies optimal reward–constraint tradeoff regimes in Safety Gymnasium.",
+   "authors": [
+    "Nikola Milosevic",
+    "Leonard Franz",
+    "Daniel Haeufle",
+    "Georg Martius",
+    "Nico Scherf",
+    "Pavel Kolev"
+   ],
+   "links": {
+    "Preprint": "https://arxiv.org/abs/2602.04599"
+   },
+   "src": "_publications/2026/sdh.md"
+  },
+  {
+   "title": "ALPARC: Artificial Languages with Phonological and Acoustic Rhythmicity Controls",
+   "date": "2026-01-15 00:00:00 +0000",
+   "selected": false,
+   "pub_pre": "",
+   "pub": "Frontiers in Psychology",
+   "pub_post": ", 17, 1786300",
+   "pub_date": "2026",
+   "abstract": "We present ALPARC, an open-source Python toolbox for generating artificial languages with precise control over phonological and acoustic rhythmicity. The toolbox introduces a phonological rhythmicity index to quantify confounding periodicity of phonological features at the transitional-probability rate, and uses a pseudo-random-walk approach to ensure unconfounded stationarity across streams of arbitrary length. ALPARC enables researchers to create controlled stimuli for studying statistical and rhythmic learning, with parametric control over syllable inventories, durations, stress patterns, and transitional probabilities.",
+   "authors": [
+    "Lorenzo Titone",
+    "Nikola Milosevic",
+    "Lars Meyer"
+   ],
+   "links": {
+    "DOI": "https://doi.org/10.3389/fpsyg.2026.1786300",
+    "Preprint": "https://doi.org/10.1101/2024.05.24.595268",
+    "Code": "https://github.com/milosen/alparc"
+   },
+   "src": "_publications/2026/alparc.md"
+  },
+  {
+   "title": "The Geometry of Nonlinear Reinforcement Learning",
+   "date": "2026-01-01 00:00:00 +0000",
+   "selected": true,
+   "pub_pre": "",
+   "pub": "Geometry, Topology, and Machine Learning Workshop (GTML 2025)",
+   "pub_post": ", PMLR 325:215-239",
+   "pub_date": "2026",
+   "abstract": "We present a unified geometric framework in which reward maximization, safe exploration, and intrinsic motivation emerge as aspects of a single optimization problem over the space of achievable long-term behavior. Classical RL techniques — policy mirror descent, natural policy gradient, trust-region methods — extend naturally to nonlinear utilities and convex constraints under this perspective, subsuming objectives related to robustness, safety, exploration, and diversity.",
+   "authors": [
+    "Nikola Milosevic",
+    "Nico Scherf"
+   ],
+   "links": {
+    "Proceedings": "https://proceedings.mlr.press/v325/milosevic26a.html",
+    "Preprint": "https://arxiv.org/abs/2509.01432"
+   },
+   "src": "_publications/2026/geometry-rl.md"
+  },
+  {
+   "title": "Embedding Safety into RL: A New Take on Trust Region Methods",
+   "date": "2025-05-29 00:01:00 +0800",
+   "selected": true,
+   "pub_pre": "",
+   "pub": "International Conference on Machine Learning (ICML)",
+   "pub_post": ", PMLR 267:44199-44224",
+   "pub_date": "2025",
+   "abstract": "Reinforcement Learning (RL) agents can solve diverse tasks but often exhibit unsafe behavior. Constrained Markov Decision Processes (CMDPs) address this by enforcing safety constraints, yet existing methods either sacrifice reward maximization or allow unsafe training. We introduce Constrained Trust Region Policy Optimization (C-TRPO), which reshapes the policy space geometry to ensure trust regions contain only safe policies, guaranteeing constraint satisfaction throughout training. We analyze its theoretical properties and connections to TRPO, Natural Policy Gradient (NPG), and Constrained Policy Optimization (CPO). Experiments show that C-TRPO reduces constraint violations while maintaining competitive returns.",
+   "authors": [
+    "Nikola Milosevic",
+    "Johannes Müller",
+    "Nico Scherf"
+   ],
+   "links": {
+    "Proceedings": "https://proceedings.mlr.press/v267/milosevic25a.html",
+    "Preprint": "https://arxiv.org/abs/2411.02957",
+    "Code": "https://github.com/milosen/ctrpo",
+    "OpenReview": "https://openreview.net/forum?id=4zRb89SbzG"
+   },
+   "src": "_publications/2025/ctrpo.md"
+  },
+  {
+   "title": "Central Path Proximal Policy Optimization",
+   "date": "2025-05-29 00:01:00 +0800",
+   "selected": true,
+   "pub_pre": "",
+   "pub": "The Exploration in AI Today Workshop at ICML 2025",
+   "pub_post": "",
+   "pub_date": "2025",
+   "abstract": "In constrained Markov decision processes, enforcing constraints during training is often thought of as decreasing the final return. Recently, it was shown that constraints can be incorporated directly in the policy geometry, yielding an optimization trajectory close to the central path of a barrier method, which does not compromise final return. Building on this idea, we introduce Central Path Proximal Policy Optimization (C3PO), a simple modification of PPO that produces policy iterates, which stay close to the central path of the constrained optimization problem. Compared to existing on-policy methods, C3PO delivers improved performance with tighter constraint enforcement, suggesting that central path-guided updates offer a promising direction for constrained policy optimization.",
+   "authors": [
+    "Nikola Milosevic",
+    "Johannes Müller",
+    "Nico Scherf"
+   ],
+   "links": {
+    "Preprint": "https://arxiv.org/abs/2506.00700",
+    "Code": "https://github.com/milosen/c3po",
+    "OpenReview": "https://openreview.net/forum?id=2cvUHCgZbF"
+   },
+   "src": "_publications/2025/c3po.md"
+  },
+  {
+   "title": "Open Problem: Active Representation Learning",
+   "date": "2025-05-29 00:01:00 +0800",
+   "selected": false,
+   "pub_pre": "",
+   "pub": "ICML Workshop on Aligning Reinforcement Learning Experimentalists and Theorists (ARLET 2024)",
+   "pub_post": "",
+   "pub_date": "2024",
+   "abstract": "In this work, we introduce Active Representation Learning, a class of problems that intertwines exploration and representation learning within partially observable environments. We extend ideas from Active Simultaneous Localization and Mapping (active SLAM), and translate them to scientific discovery problems, exemplified by adaptive microscopy. We explore the need for a framework that derives exploration skills from representations, aiming to enhance the efficiency and effectiveness of data collection and model building in the natural sciences.",
+   "authors": [
+    "Nikola Milosevic",
+    "Gesine Müller",
+    "Jan Huisken",
+    "Nico Scherf"
+   ],
+   "links": {
+    "Preprint": "https://arxiv.org/abs/2406.03845"
+   },
+   "src": "_publications/2024/arl.md"
+  }
+ ],
+ "news": [
+  {
+   "title": {
+    "en": "Our paper <strong>Active Inference as a Convex Markov Decision Process</strong> was accepted at <strong>IWAI 2026</strong>!",
+    "de": "Unsere Arbeit <strong>Active Inference as a Convex Markov Decision Process</strong> wurde bei der <strong>IWAI 2026</strong> angenommen!"
+   },
+   "date": "2026-07-17 12:00:00 +0200",
+   "src": "_news/2026-iwai.md"
+  },
+  {
+   "title": {
+    "en": "I'm happy to present our work at EWRL 2025 in Tübingen, Germany.",
+    "de": "Ich freue mich, unsere Arbeit auf der EWRL 2025 in Tübingen zu präsentieren."
+   },
+   "date": "2025-09-01 20:45:00 -0400",
+   "src": "_news/2025-ewrl.md"
+  },
+  {
+   "title": {
+    "en": "My first paper got <strong>accepted as a conference paper at ICML 2025</strong>!",
+    "de": "Meine erste Arbeit wurde <strong>als Konferenzbeitrag bei der ICML 2025 angenommen</strong>!"
+   },
+   "date": "2025-05-29 20:45:00 -0400",
+   "src": "_news/2025-embedding.md"
+  }
+ ]
+}

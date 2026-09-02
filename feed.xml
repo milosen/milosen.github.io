@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+  <title>Nikola Milosevic</title>
+  <link>https://milosen.github.io/</link>
+  <description>News from Nikola Milosevic</description>
+  <language>en</language>
+  <item>
+    <title>en: &#x27;Our paper Active Inference as a Convex Markov Decision Process was accepted at IWAI 2026!</title>
+    <link>https://milosen.github.io/</link>
+    <guid isPermaLink="false">news-2026-07-17</guid>
+    <pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>en: &quot;I&#x27;m happy to present our work at EWRL 2025 in Tübingen, Germany.</title>
+    <link>https://milosen.github.io/</link>
+    <guid isPermaLink="false">news-2025-09-01</guid>
+    <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>en: &quot;My first paper got accepted as a conference paper at ICML 2025!</title>
+    <link>https://milosen.github.io/</link>
+    <guid isPermaLink="false">news-2025-05-29</guid>
+    <pubDate>Thu, 29 May 2025 00:00:00 +0000</pubDate>
+  </item>
+</channel></rss>

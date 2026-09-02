@@ -1,38 +1,123 @@
----
-layout: default
-title : Homepage
-navbar_key: home
-lang: en
-translated: true
----
-{%- assign t = site.data.i18n[page.lang] -%}
-{%- assign selected_pubs_title = t.selected_publications -%}
-{% include widgets/profile_card.html %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nikola Milosevic</title>
+<meta name="description" content="Nikola Milosevic — Ph.D. researcher at MPI CBS working on reinforcement learning that is safe, well understood, and ready for the real world.">
+<link rel="canonical" href="https://milosen.github.io/">
+<link rel="alternate" hreflang="en" href="https://milosen.github.io/">
+<link rel="alternate" hreflang="de" href="https://milosen.github.io/de/">
+<link rel="alternate" hreflang="x-default" href="https://milosen.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nikola Milosevic">
+<meta property="og:description" content="Nikola Milosevic — Ph.D. researcher at MPI CBS working on reinforcement learning that is safe, well understood, and ready for the real world.">
+<meta property="og:url" content="https://milosen.github.io/">
+<meta property="og:image" content="https://milosen.github.io/assets/images/portrait.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@NikMilosevic">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body><header class="masthead wrap">
+<a class="name" href="./">Nikola Milosevic</a>
+<nav>
+<a href="./" aria-current="page">Home</a>
+<a href="publications.html">Publications</a>
+<a href="assets/cv.pdf">CV</a>
+<span class="lang"><span>EN</span><span class="sep">/</span><a href="de/" hreflang="de">DE</a></span>
+</nav>
+</header>
+<main>
+<div class="wrap">
+<div class="hero">
+<h1>Nikola Milosevic</h1>
+<p class="role">Ph.D. Candidate, <a href="https://www.cbs.mpg.de/en">MPI CBS</a>, Leipzig</p>
+<div class="bio">
+<p>I’m a Ph.D. researcher at MPI CBS working on <a href="https://en.wikipedia.org/wiki/Reinforcement_learning">reinforcement learning</a> that is safe, well understood, and ready for the real world.</p>
+<p>Most RL breakthroughs live in simulators. Getting them to work under real-world constraints — safety requirements, limited data, deployment risk — is not just an engineering challenge, but the place where the hard and interesting theoretical problems are. I work on building a strong theoretical foundation for reinforcement learning for precisely these issues.</p>
+</div>
+<div class="contact">
+<a href="mailto:milose.nik&#64;gmail.com">milose.nik@gmail.com</a>
+<a href="assets/cv.pdf">CV (PDF)</a>
+<a href="https://scholar.google.com/citations?user=vGYpn-sAAAAJ&amp;hl" rel="noopener">Google&nbsp;Scholar</a>
+<a href="https://github.com/milosen" rel="noopener">GitHub</a>
+<a href="https://orcid.org/0000-0003-1904-8867" rel="noopener">ORCID</a>
+<a href="https://www.linkedin.com/in/nikola-milosevic-5061271a7" rel="noopener">LinkedIn</a>
+</div>
+</div>
 
+<section>
+<h2 class="sec-head">News</h2>
+<div class="news">
+<div class="news-item"><time datetime="2026-07-17">Jul 2026</time><p>Our paper <strong>Active Inference as a Convex Markov Decision Process</strong> was accepted at <strong>IWAI 2026</strong>!</p></div>
+<div class="news-item"><time datetime="2025-09-01">Sep 2025</time><p>I'm happy to present our work at EWRL 2025 in Tübingen, Germany.</p></div>
+<div class="news-item"><time datetime="2025-05-29">May 2025</time><p>My first paper got <strong>accepted as a conference paper at ICML 2025</strong>!</p></div>
+</div>
+</section>
 
-{% if site.data.display.homepage.show_experience %}
-    {% include widgets/experience_card.html %}
-{% endif %}
+<section>
+<h2 class="sec-head">Selected publications</h2>
+<article class="pub">
+<h3>Active Inference as a Convex Markov Decision Process</h3>
+<p class="authors"><span class="me">Nikola Milosevic</span>, Nicolás Hinrichs, Nico Scherf</p>
+<p class="venue"><em>International Workshop on Active Inference (IWAI 2026)</em></p>
+<p class="links"><a href="https://arxiv.org/abs/2607.20152" rel="noopener">Preprint</a></p>
+<details><summary>Abstract</summary><p class="abstract">Active Inference (AIF) frames adaptive behavior as the minimization of expected free energy (EFE), combining epistemic and pragmatic objectives within a single variational principle. We frame AIF as policy optimization and show that, for closed-loop control policies, EFE minimization can be formulated as a convex Markov decision process (MDP). In this formulation, the pragmatic terms are linear in the predictive state marginals and therefore equivalent to reward maximization in a latent MDP, while the epistemic value introduces a nonlinear component that distinguishes EFE minimization from standard reinforcement learning. This perspective further reveals the epistemic drive of active inference as a policy-dependent (performative) reward. We analyze finite-horizon, discounted, and average-reward formulations of EFE and derive a mirror descent (MD) algorithm that locally linearizes the objective around the current state marginals, yielding a policy-dependent reward that is compatible with actor-critic methods and dynamic programming. Finally, we argue that coupling world-model learning with policy optimization gives active inference the structure of performative reinforcement learning, providing a route toward grounding active inference within modern reinforcement learning and optimization theory, including convergence analysis and principled policy improvement guarantees.</p></details>
+</article>
+<article class="pub">
+<h3>Physical embodiment enables information processing beyond explicit flow sensing in active matter</h3>
+<p class="authors">Diptabrata Paul, <span class="me">Nikola Milosevic</span>, Nico Scherf, Frank Cichos</p>
+<p class="venue"><em>Science Advances</em>, 12(11), eaec0783</p>
+<p class="links"><a href="https://doi.org/10.1126/sciadv.aec0783" rel="noopener">DOI</a></p>
+<details><summary>Abstract</summary><p class="abstract">We show that physical embodiment in active matter systems enables information processing capabilities that exceed what is possible through explicit flow sensing alone. Using microswimmers as a model system, we demonstrate that the body itself acts as a computational resource, coupling sensory and motor degrees of freedom in ways that simplify the control problem.</p></details>
+</article>
+<article class="pub">
+<h3>The Geometry of Nonlinear Reinforcement Learning</h3>
+<p class="authors"><span class="me">Nikola Milosevic</span>, Nico Scherf</p>
+<p class="venue"><em>Geometry, Topology, and Machine Learning Workshop (GTML 2025)</em>, PMLR 325:215-239</p>
+<p class="links"><a href="https://proceedings.mlr.press/v325/milosevic26a.html" rel="noopener">Proceedings</a><span class="dot">·</span><a href="https://arxiv.org/abs/2509.01432" rel="noopener">Preprint</a></p>
+<details><summary>Abstract</summary><p class="abstract">We present a unified geometric framework in which reward maximization, safe exploration, and intrinsic motivation emerge as aspects of a single optimization problem over the space of achievable long-term behavior. Classical RL techniques — policy mirror descent, natural policy gradient, trust-region methods — extend naturally to nonlinear utilities and convex constraints under this perspective, subsuming objectives related to robustness, safety, exploration, and diversity.</p></details>
+</article>
+<article class="pub">
+<h3>Embedding Safety into RL: A New Take on Trust Region Methods</h3>
+<p class="authors"><span class="me">Nikola Milosevic</span>, Johannes Müller, Nico Scherf</p>
+<p class="venue"><em>International Conference on Machine Learning (ICML)</em>, PMLR 267:44199-44224</p>
+<p class="links"><a href="https://proceedings.mlr.press/v267/milosevic25a.html" rel="noopener">Proceedings</a><span class="dot">·</span><a href="https://arxiv.org/abs/2411.02957" rel="noopener">Preprint</a><span class="dot">·</span><a href="https://github.com/milosen/ctrpo" rel="noopener">Code</a><span class="dot">·</span><a href="https://openreview.net/forum?id=4zRb89SbzG" rel="noopener">OpenReview</a></p>
+<details><summary>Abstract</summary><p class="abstract">Reinforcement Learning (RL) agents can solve diverse tasks but often exhibit unsafe behavior. Constrained Markov Decision Processes (CMDPs) address this by enforcing safety constraints, yet existing methods either sacrifice reward maximization or allow unsafe training. We introduce Constrained Trust Region Policy Optimization (C-TRPO), which reshapes the policy space geometry to ensure trust regions contain only safe policies, guaranteeing constraint satisfaction throughout training. We analyze its theoretical properties and connections to TRPO, Natural Policy Gradient (NPG), and Constrained Policy Optimization (CPO). Experiments show that C-TRPO reduces constraint violations while maintaining competitive returns.</p></details>
+</article>
+<article class="pub">
+<h3>Central Path Proximal Policy Optimization</h3>
+<p class="authors"><span class="me">Nikola Milosevic</span>, Johannes Müller, Nico Scherf</p>
+<p class="venue"><em>The Exploration in AI Today Workshop at ICML 2025</em></p>
+<p class="links"><a href="https://arxiv.org/abs/2506.00700" rel="noopener">Preprint</a><span class="dot">·</span><a href="https://github.com/milosen/c3po" rel="noopener">Code</a><span class="dot">·</span><a href="https://openreview.net/forum?id=2cvUHCgZbF" rel="noopener">OpenReview</a></p>
+<details><summary>Abstract</summary><p class="abstract">In constrained Markov decision processes, enforcing constraints during training is often thought of as decreasing the final return. Recently, it was shown that constraints can be incorporated directly in the policy geometry, yielding an optimization trajectory close to the central path of a barrier method, which does not compromise final return. Building on this idea, we introduce Central Path Proximal Policy Optimization (C3PO), a simple modification of PPO that produces policy iterates, which stay close to the central path of the constrained optimization problem. Compared to existing on-policy methods, C3PO delivers improved performance with tighter constraint enforcement, suggesting that central path-guided updates offer a promising direction for constrained policy optimization.</p></details>
+</article>
+<p class="more-link"><a href="publications.html">All publications <span aria-hidden="true">→</span></a></p>
+</section>
 
-{% if site.data.display.homepage.show_news %}
-    {% assign count_news = site.news | size %}
-    {% if count_news > 0 %}
-        {% include widgets/news_card.html limit=site.data.display.homepage.num_news %}
-    {% endif %}
-{% endif %}
+<section>
+<h2 class="sec-head">Education</h2>
+<div class="rows">
+<div class="row-item"><span class="what">Max Planck Institute for Human Cognitive and Brain Sciences</span><span class="when">2022 — present</span><span class="where">Neural Data Science Lab · Ph.D. Candidate</span></div>
+<div class="row-item"><span class="what">University of Applied Sciences Leipzig</span><span class="when">2019 — 2021</span><span class="where">M.Sc. Electrical Engineering</span></div>
+</div>
+</section>
 
-{% if site.data.display.homepage.show_posts %}
-    {% assign count_posts = site.posts | size %}
-    {% if count_posts > 0 %}
-        {% include widgets/posts_card.html %}
-    {% endif %}
-{% endif %}
-
-{% if site.data.display.homepage.show_selected_publications %}
-    {% assign pubs = site.publications | sort: "date" | reverse | where: "selected", true %}
-    {% 
-        include widgets/publication_card.html 
-        publications=pubs
-        title=selected_pubs_title
-    %}
-{% endif %}
+<section>
+<h2 class="sec-head">Awards</h2>
+<div class="rows">
+<div class="row-item"><span class="what">Master’s Thesis Award, University of Applied Sciences Leipzig</span><span class="when">2021</span></div>
+</div>
+</section>
+</div>
+</main>
+<footer class="wrap">
+<span>© 2026 Nikola Milosevic</span>
+<span class="right"><a href="feed.xml">RSS</a></span>
+</footer>
+</body>
+</html>
