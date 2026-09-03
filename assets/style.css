@@ -360,3 +360,7 @@ footer .right { margin-left: auto; }
 .more-link a:hover { border-bottom-color: var(--accent); }
 .more-link span { transition: transform .15s; display: inline-block; }
 .more-link a:hover span { transform: translateX(2px); }
+
+/* A publication directly after a section heading would otherwise draw its
+   own top rule right under the heading's bottom rule. */
+.sec-head + .pub { border-top: 0; padding-top: 0; }
