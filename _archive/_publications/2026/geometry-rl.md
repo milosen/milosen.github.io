@@ -2,7 +2,7 @@
 title:          "The Geometry of Nonlinear Reinforcement Learning"
 # Workshop was held 10-14 Nov 2025; PMLR dates the proceedings 2026.
 date:           2026-01-01 00:00:00 +0000
-selected:       true
+selected:       false
 pub:            "Geometry, Topology, and Machine Learning Workshop (GTML 2025)"
 pub_post:       ", PMLR 325:215-239"
 pub_date:       "2026"

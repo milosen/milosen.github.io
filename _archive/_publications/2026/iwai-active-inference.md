@@ -2,6 +2,7 @@
 title:          "Active Inference as a Convex Markov Decision Process"
 date:           2026-07-17 00:00:00 +0000
 selected:       true
+pub_pre:        "Accepted — "
 pub:            "International Workshop on Active Inference (IWAI 2026)"
 pub_date:       "2026"
 

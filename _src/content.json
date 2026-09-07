@@ -1,10 +1,31 @@
 {
  "pubs": [
   {
+   "title": "The Dually Flat Geometry of Planning as Inference",
+   "date": "2026-09-03 00:00:00 +0000",
+   "selected": false,
+   "pub_pre": "Preprint — ",
+   "pub": "arXiv:2609.04005",
+   "pub_post": "",
+   "pub_date": "2026",
+   "abstract": "We present an alternative characterization of the occupancy measure of reinforcement learning, obtained by embedding the planning criterion into the dynamics through a resetting planning process. Its stationary measure, which we term visitation measure, is the object on which the information geometry of decision making is most naturally expressed. The achievable visitation measures form a dually flat statistical manifold whose two affine charts are the visitation probabilities and the log-policies, dual under the conditional entropy. This structure makes planning-as-inference generalize from linear rewards to nonlinear functionals of the visitation, each iterate solved by one natural-gradient step, and gives the temporal-difference error the interpretation of a marginal-utility estimate. We develop the geometry and its consequences for reinforcement learning and theoretical neuroscience.",
+   "authors": [
+    "Nikola Milosevic",
+    "Asaki Kataoka",
+    "Nicolás Hinrichs",
+    "Kenji Doya",
+    "Nico Scherf"
+   ],
+   "links": {
+    "Preprint": "https://arxiv.org/abs/2609.04005"
+   },
+   "src": "_publications/2026/dually-flat-geometry.md"
+  },
+  {
    "title": "Active Inference as a Convex Markov Decision Process",
    "date": "2026-07-17 00:00:00 +0000",
    "selected": true,
-   "pub_pre": "",
+   "pub_pre": "Accepted — ",
    "pub": "International Workshop on Active Inference (IWAI 2026)",
    "pub_post": "",
    "pub_date": "2026",
@@ -85,7 +106,7 @@
   {
    "title": "The Geometry of Nonlinear Reinforcement Learning",
    "date": "2026-01-01 00:00:00 +0000",
-   "selected": true,
+   "selected": false,
    "pub_pre": "",
    "pub": "Geometry, Topology, and Machine Learning Workshop (GTML 2025)",
    "pub_post": ", PMLR 325:215-239",
@@ -126,7 +147,7 @@
   {
    "title": "Central Path Proximal Policy Optimization",
    "date": "2025-05-29 00:01:00 +0800",
-   "selected": true,
+   "selected": false,
    "pub_pre": "",
    "pub": "The Exploration in AI Today Workshop at ICML 2025",
    "pub_post": "",

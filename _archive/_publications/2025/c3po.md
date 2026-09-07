@@ -1,7 +1,7 @@
 ---
 title:          "Central Path Proximal Policy Optimization"
 date:           2025-05-29 00:01:00 +0800
-selected:       true
+selected:       false
 pub:            "The Exploration in AI Today Workshop at ICML 2025"
 # pub_pre:        "Submitted to "
 # pub_post:       'Under review.'
