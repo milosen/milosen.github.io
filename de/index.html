@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nikola Milosevic</title>
-<meta name="description" content="Nikola Milosevic — Doktorand am MPI CBS, Forschung zu Reinforcement Learning, das sicher, theoretisch fundiert und praxistauglich ist.">
+<meta name="description" content="Nikola Milosevic — Doktorand am MPI CBS, Forschung an der Schnittstelle von Reinforcement Learning, Regelungstechnik und Optimierung.">
 <link rel="canonical" href="https://milosen.github.io/de/">
 <link rel="alternate" hreflang="en" href="https://milosen.github.io/">
 <link rel="alternate" hreflang="de" href="https://milosen.github.io/de/">
 <link rel="alternate" hreflang="x-default" href="https://milosen.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Nikola Milosevic">
-<meta property="og:description" content="Nikola Milosevic — Doktorand am MPI CBS, Forschung zu Reinforcement Learning, das sicher, theoretisch fundiert und praxistauglich ist.">
+<meta property="og:description" content="Nikola Milosevic — Doktorand am MPI CBS, Forschung an der Schnittstelle von Reinforcement Learning, Regelungstechnik und Optimierung.">
 <meta property="og:url" content="https://milosen.github.io/de/">
 <meta property="og:image" content="https://milosen.github.io/assets/images/portrait.jpg">
 <meta name="twitter:card" content="summary">
@@ -26,7 +26,8 @@
 <a class="name" href="./">Nikola Milosevic</a>
 <nav>
 <a href="./" aria-current="page">Start</a>
-<a href="publications.html">Publikationen</a>
+<a href="./#publications">Publikationen</a>
+<a href="./#talks">Vorträge &amp; Poster</a>
 <a href="../assets/cv.pdf">Lebenslauf</a>
 <span class="lang"><span>DE</span><span class="sep">/</span><a href="../" hreflang="en">EN</a></span>
 </nav>
@@ -37,8 +38,8 @@
 <h1>Nikola Milosevic</h1>
 <p class="role">Doktorand, <a href="https://www.cbs.mpg.de/de">MPI CBS</a>, Leipzig</p>
 <div class="bio">
-<p>Ich bin Doktorand am MPI CBS und forsche an <a href="https://de.wikipedia.org/wiki/Best%C3%A4rkendes_Lernen">Reinforcement Learning</a>, das sicher, theoretisch gut verstanden und praxistauglich ist.</p>
-<p>Die meisten Fortschritte im Reinforcement Learning entstehen in Simulationen. Sie unter realen Bedingungen zum Laufen zu bringen (mit Sicherheitsanforderungen, begrenzten Daten und begrenzter Zeit, im Einsatz auf physischer Hardware) bleibt eine offene Herausforderung. Doch genau dort liegen auch die interessanten theoretischen Fragen, und dort lassen sich Erkenntnisse aus Biologie und Neurowissenschaft einbringen. Ich arbeite daran, für ebendiese Fragen ein tragfähiges Fundament für Reinforcement Learning über Anwendungsfelder hinweg zu schaffen.</p>
+<p>Ich bin Doktorand am MPI CBS und forsche an der Schnittstelle von <a href="https://de.wikipedia.org/wiki/Best%C3%A4rkendes_Lernen">Reinforcement Learning</a>, Regelungstechnik und Optimierung, mit Anwendungen in der theoretischen Neurowissenschaft, KI-Sicherheit und Robotik.</p>
+<p>Im Mittelpunkt stehen die mathematischen Grundlagen des Reinforcement Learning, insbesondere die Geometrie der Policy-Optimierung, und deren Übersetzung in Algorithmen mit Garantien: Agenten, die Sicherheitsbedingungen während des gesamten Trainings einhalten, Zielfunktionen jenseits der Belohnungsmaximierung und fundierte Modelle adaptiven Verhaltens wie Active Inference.</p>
 </div>
 <div class="contact">
 <a href="mailto:milose.nik&#64;gmail.com">milose.nik@gmail.com</a>
@@ -51,14 +52,14 @@
 </div>
 
 
-<section>
+<section id="publications">
 <h2 class="sec-head">Ausgewählte Publikationen</h2>
 <article class="pub">
 <h3>Active Inference as a Convex Markov Decision Process</h3>
 <p class="authors"><span class="me">Nikola Milosevic</span>, Nicolás Hinrichs, Nico Scherf</p>
-<p class="venue">Accepted — <em>International Workshop on Active Inference (IWAI 2026)</em></p>
+<p class="venue"><em>International Workshop on Active Inference (IWAI 2026)</em></p>
 <p class="links"><a href="https://arxiv.org/abs/2607.20152" rel="noopener">Preprint</a></p>
-<details><summary>Zusammenfassung</summary><p class="abstract">Active Inference (AIF) frames adaptive behavior as the minimization of expected free energy (EFE), combining epistemic and pragmatic objectives within a single variational principle. We frame AIF as policy optimization and show that, for closed-loop control policies, EFE minimization can be formulated as a convex Markov decision process (MDP). In this formulation, the pragmatic terms are linear in the predictive state marginals and therefore equivalent to reward maximization in a latent MDP, while the epistemic value introduces a nonlinear component that distinguishes EFE minimization from standard reinforcement learning. This perspective further reveals the epistemic drive of active inference as a policy-dependent (performative) reward. We analyze finite-horizon, discounted, and average-reward formulations of EFE and derive a mirror descent (MD) algorithm that locally linearizes the objective around the current state marginals, yielding a policy-dependent reward that is compatible with actor-critic methods and dynamic programming. Finally, we argue that coupling world-model learning with policy optimization gives active inference the structure of performative reinforcement learning, providing a route toward grounding active inference within modern reinforcement learning and optimization theory, including convergence analysis and principled policy improvement guarantees.</p></details>
+<details><summary>Zusammenfassung</summary><p class="abstract">Active Inference (AIF) frames adaptive behavior as the minimization of expected free energy (EFE), combining epistemic and pragmatic objectives within a single variational principle. We frame AIF as policy optimization and show that, for closed-loop control policies, EFE minimization can be formulated as a convex Markov decision process (MDP). This perspective reveals that policy-dependent reward prediction errors transmit natural gradients of the expected free energy backwards in time rather than up a hierarchy. Finally, we show that coupling world-model learning with policy optimization gives active inference the structure of performative reinforcement learning. Together this places EFE minimization within modern reinforcement learning and optimization theory and opens a route toward principled algorithms for active inference.</p></details>
 </article>
 <article class="pub">
 <h3>Physical embodiment enables information processing beyond explicit flow sensing in active matter</h3>
@@ -77,13 +78,27 @@
 <p class="more-link"><a href="publications.html">Alle Publikationen <span aria-hidden="true">→</span></a></p>
 </section>
 
-<section>
-<h2 class="sec-head">Ausbildung</h2>
+<section id="talks">
+<h2 class="sec-head">Vorträge &amp; Poster</h2>
 <div class="rows">
-<div class="row-item"><span class="what">Max-Planck-Institut für Kognitions- und Neurowissenschaften</span><span class="when">2022 — heute</span><span class="where">Neural Data Science Lab · Doktorand</span></div>
-<div class="row-item"><span class="what">Hochschule für Technik, Wirtschaft und Kultur Leipzig</span><span class="when">2019 — 2021</span><span class="where">M.Sc. Elektrotechnik</span></div>
+<div class="row-item"><span class="what">The Duality of Perception and Action in Brains, Minds, and Machines <span class="tag">Demnächst</span></span><span class="when">Nov. 2026</span><span class="where">Vortrag · <a href="https://sarl-plus.github.io/reinforcement_learning_coffee/">Reinforcement Learning Coffee</a>, PLUS Salzburg</span></div>
+<div class="row-item"><span class="what">Active Inference as a Convex Markov Decision Process <span class="tag">Demnächst</span></span><span class="when">Okt. 2026</span><span class="where">International Workshop on Active Inference (IWAI 2026) · Madrid, Spanien</span></div>
+<div class="row-item"><span class="what">The Geometry of Nonlinear Reinforcement Learning</span><span class="when">Nov. 2025</span><span class="where">Lightning Talk · <a href="https://www.mis.mpg.de/events/series/workshop-on-geometry-topology-and-machine-learning-gtml-2025">Workshop on Geometry, Topology, and Machine Learning (GTML 2025)</a>, Leipzig</span></div>
+<div class="row-item"><span class="what">On the Generality of Relative Entropy Policy Iteration</span><span class="when">Okt. 2025</span><span class="where">Vortrag · <a href="https://www.mis.mpg.de/de/events/event/on-the-generality-of-relative-entropy-policy-iteration">MiS/ScaDS/CBS Math and AI Meeting</a>, Universität Leipzig</span></div>
+<div class="row-item"><span class="what">Embedding Safety into RL: A New Take on Trust Region Methods</span><span class="when">Sep. 2025</span><span class="where">European Workshop on Reinforcement Learning (EWRL 2025) · Tübingen</span></div>
+<div class="row-item"><span class="what">Embedding Safety into RL: A New Take on Trust Region Methods</span><span class="when">Juli 2025</span><span class="where">Poster · ICML 2025 · Vancouver, Kanada</span></div>
+<div class="row-item"><span class="what">Central Path Proximal Policy Optimization</span><span class="when">Juli 2025</span><span class="where">Poster · Exploration in AI Today Workshop, ICML 2025 · Vancouver, Kanada</span></div>
 </div>
 </section>
+
+<section id="teaching">
+<h2 class="sec-head">Lehre &amp; Betreuung</h2>
+<div class="rows">
+<div class="row-item"><span class="what">Lehrassistent, Advanced Deep Learning</span><span class="when">heute</span><span class="where">Universität Leipzig · Vorlesungen zu Deep Reinforcement Learning und Deep Latent Variable Models für Masterstudierende</span></div>
+<div class="row-item"><span class="what">Tutor, Systemtheorie</span><span class="when">2020 — 2021</span><span class="where">HTWK Leipzig · Tutorien und Prüfungsvorbereitung für Studierende im dritten Semester</span></div>
+</div>
+</section>
+
 
 </div>
 </main>

@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nikola Milosevic</title>
-<meta name="description" content="Nikola Milosevic — Ph.D. researcher at MPI CBS working on reinforcement learning that is safe, well understood, and ready for the real world.">
+<meta name="description" content="Nikola Milosevic — Ph.D. researcher at MPI CBS working at the intersection of reinforcement learning, control, and optimization.">
 <link rel="canonical" href="https://milosen.github.io/">
 <link rel="alternate" hreflang="en" href="https://milosen.github.io/">
 <link rel="alternate" hreflang="de" href="https://milosen.github.io/de/">
 <link rel="alternate" hreflang="x-default" href="https://milosen.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Nikola Milosevic">
-<meta property="og:description" content="Nikola Milosevic — Ph.D. researcher at MPI CBS working on reinforcement learning that is safe, well understood, and ready for the real world.">
+<meta property="og:description" content="Nikola Milosevic — Ph.D. researcher at MPI CBS working at the intersection of reinforcement learning, control, and optimization.">
 <meta property="og:url" content="https://milosen.github.io/">
 <meta property="og:image" content="https://milosen.github.io/assets/images/portrait.jpg">
 <meta name="twitter:card" content="summary">
@@ -26,7 +26,8 @@
 <a class="name" href="./">Nikola Milosevic</a>
 <nav>
 <a href="./" aria-current="page">Home</a>
-<a href="publications.html">Publications</a>
+<a href="./#publications">Publications</a>
+<a href="./#talks">Talks &amp; Posters</a>
 <a href="assets/cv.pdf">CV</a>
 <span class="lang"><span>EN</span><span class="sep">/</span><a href="de/" hreflang="de">DE</a></span>
 </nav>
@@ -37,8 +38,8 @@
 <h1>Nikola Milosevic</h1>
 <p class="role">Ph.D. Candidate, <a href="https://www.cbs.mpg.de/en">MPI CBS</a>, Leipzig</p>
 <div class="bio">
-<p>I’m a Ph.D. researcher at MPI CBS working on <a href="https://en.wikipedia.org/wiki/Reinforcement_learning">reinforcement learning</a> that is safe, well understood, and ready for the real world.</p>
-<p>Most RL breakthroughs happen in simulation. Getting them to work under real-world constraints (such as safety requirements, limited data and time, deployment on physical hardware) remains an open challenge. But it is also the place where the interesting theoretical problems lie, and where insights from biology and neuroscience can be brought to bear. I work on building a strong foundation for reinforcement learning across domains for precisely these issues.</p>
+<p>I’m a Ph.D. researcher at MPI CBS working at the intersection of <a href="https://en.wikipedia.org/wiki/Reinforcement_learning">reinforcement learning</a>, control, and optimization, with applications in theoretical neuroscience, AI safety, and robotics.</p>
+<p>My work focuses on the mathematical foundations of reinforcement learning, in particular the geometry of policy optimization, and on turning them into algorithms with guarantees: agents that satisfy safety constraints throughout training, objectives beyond reward maximization, and principled models of adaptive behavior such as active inference.</p>
 </div>
 <div class="contact">
 <a href="mailto:milose.nik&#64;gmail.com">milose.nik@gmail.com</a>
@@ -51,14 +52,14 @@
 </div>
 
 
-<section>
+<section id="publications">
 <h2 class="sec-head">Selected publications</h2>
 <article class="pub">
 <h3>Active Inference as a Convex Markov Decision Process</h3>
 <p class="authors"><span class="me">Nikola Milosevic</span>, Nicolás Hinrichs, Nico Scherf</p>
-<p class="venue">Accepted — <em>International Workshop on Active Inference (IWAI 2026)</em></p>
+<p class="venue"><em>International Workshop on Active Inference (IWAI 2026)</em></p>
 <p class="links"><a href="https://arxiv.org/abs/2607.20152" rel="noopener">Preprint</a></p>
-<details><summary>Abstract</summary><p class="abstract">Active Inference (AIF) frames adaptive behavior as the minimization of expected free energy (EFE), combining epistemic and pragmatic objectives within a single variational principle. We frame AIF as policy optimization and show that, for closed-loop control policies, EFE minimization can be formulated as a convex Markov decision process (MDP). In this formulation, the pragmatic terms are linear in the predictive state marginals and therefore equivalent to reward maximization in a latent MDP, while the epistemic value introduces a nonlinear component that distinguishes EFE minimization from standard reinforcement learning. This perspective further reveals the epistemic drive of active inference as a policy-dependent (performative) reward. We analyze finite-horizon, discounted, and average-reward formulations of EFE and derive a mirror descent (MD) algorithm that locally linearizes the objective around the current state marginals, yielding a policy-dependent reward that is compatible with actor-critic methods and dynamic programming. Finally, we argue that coupling world-model learning with policy optimization gives active inference the structure of performative reinforcement learning, providing a route toward grounding active inference within modern reinforcement learning and optimization theory, including convergence analysis and principled policy improvement guarantees.</p></details>
+<details><summary>Abstract</summary><p class="abstract">Active Inference (AIF) frames adaptive behavior as the minimization of expected free energy (EFE), combining epistemic and pragmatic objectives within a single variational principle. We frame AIF as policy optimization and show that, for closed-loop control policies, EFE minimization can be formulated as a convex Markov decision process (MDP). This perspective reveals that policy-dependent reward prediction errors transmit natural gradients of the expected free energy backwards in time rather than up a hierarchy. Finally, we show that coupling world-model learning with policy optimization gives active inference the structure of performative reinforcement learning. Together this places EFE minimization within modern reinforcement learning and optimization theory and opens a route toward principled algorithms for active inference.</p></details>
 </article>
 <article class="pub">
 <h3>Physical embodiment enables information processing beyond explicit flow sensing in active matter</h3>
@@ -77,13 +78,27 @@
 <p class="more-link"><a href="publications.html">All publications <span aria-hidden="true">→</span></a></p>
 </section>
 
-<section>
-<h2 class="sec-head">Education</h2>
+<section id="talks">
+<h2 class="sec-head">Talks &amp; posters</h2>
 <div class="rows">
-<div class="row-item"><span class="what">Max Planck Institute for Human Cognitive and Brain Sciences</span><span class="when">2022 — present</span><span class="where">Neural Data Science Lab · Ph.D. Candidate</span></div>
-<div class="row-item"><span class="what">University of Applied Sciences Leipzig</span><span class="when">2019 — 2021</span><span class="where">M.Sc. Electrical Engineering</span></div>
+<div class="row-item"><span class="what">The Duality of Perception and Action in Brains, Minds, and Machines <span class="tag">Upcoming</span></span><span class="when">Nov 2026</span><span class="where">Talk · <a href="https://sarl-plus.github.io/reinforcement_learning_coffee/">Reinforcement Learning Coffee</a>, PLUS Salzburg</span></div>
+<div class="row-item"><span class="what">Active Inference as a Convex Markov Decision Process <span class="tag">Upcoming</span></span><span class="when">Oct 2026</span><span class="where">International Workshop on Active Inference (IWAI 2026) · Madrid, Spain</span></div>
+<div class="row-item"><span class="what">The Geometry of Nonlinear Reinforcement Learning</span><span class="when">Nov 2025</span><span class="where">Lightning talk · <a href="https://www.mis.mpg.de/events/series/workshop-on-geometry-topology-and-machine-learning-gtml-2025">Workshop on Geometry, Topology, and Machine Learning (GTML 2025)</a>, Leipzig</span></div>
+<div class="row-item"><span class="what">On the Generality of Relative Entropy Policy Iteration</span><span class="when">Oct 2025</span><span class="where">Talk · <a href="https://www.mis.mpg.de/de/events/event/on-the-generality-of-relative-entropy-policy-iteration">MiS/ScaDS/CBS Math and AI Meeting</a>, Leipzig University</span></div>
+<div class="row-item"><span class="what">Embedding Safety into RL: A New Take on Trust Region Methods</span><span class="when">Sep 2025</span><span class="where">European Workshop on Reinforcement Learning (EWRL 2025) · Tübingen, Germany</span></div>
+<div class="row-item"><span class="what">Embedding Safety into RL: A New Take on Trust Region Methods</span><span class="when">Jul 2025</span><span class="where">Poster · ICML 2025 · Vancouver, Canada</span></div>
+<div class="row-item"><span class="what">Central Path Proximal Policy Optimization</span><span class="when">Jul 2025</span><span class="where">Poster · Exploration in AI Today Workshop, ICML 2025 · Vancouver, Canada</span></div>
 </div>
 </section>
+
+<section id="teaching">
+<h2 class="sec-head">Teaching &amp; supervision</h2>
+<div class="rows">
+<div class="row-item"><span class="what">Teaching Assistant, Advanced Deep Learning</span><span class="when">present</span><span class="where">Leipzig University · Lectures on deep reinforcement learning and deep latent variable models for Master’s students</span></div>
+<div class="row-item"><span class="what">Teaching Assistant, Systems Theory</span><span class="when">2020 — 2021</span><span class="where">HTWK Leipzig · Tutorials and exam preparation for third-semester students</span></div>
+</div>
+</section>
+
 
 </div>
 </main>
